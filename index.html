@@ -85,8 +85,9 @@
         .copy-btn { background: rgba(255,255,255,0.1); border: none; color: #fff; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; transition: 0.2s; }
         .copy-btn:hover { background: var(--accent-glow); color: #000; }
 
-        /* Floating Audio Player & Visualizer */
-        .audio-player-widget { position: fixed; bottom: 25px; right: 25px; z-index: 90; background: rgba(15, 23, 42, 0.9); border: 1px solid var(--card-border); padding: 12px 20px; border-radius: 50px; backdrop-filter: blur(16px); display: flex; align-items: center; gap: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); }
+        /* Floating Audio Player Widget */
+        .audio-player-widget { position: fixed; bottom: 25px; right: 25px; z-index: 90; background: rgba(15, 23, 42, 0.9); border: 1px solid var(--card-border); padding: 12px 20px; border-radius: 50px; backdrop-filter: blur(16px); display: flex; align-items: center; gap: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); cursor: pointer; transition: 0.3s ease; }
+        .audio-player-widget:hover { border-color: var(--accent-glow); transform: scale(1.03); }
         .visualizer-canvas { width: 60px; height: 25px; }
 
         @media (max-width: 900px) { .bento-grid { grid-template-columns: 1fr; } .bento-card.wide { grid-column: span 1; } }
@@ -181,10 +182,13 @@
         </div>
     </div>
 
-    <!-- Floating Audio Widget -->
-    <div class="audio-player-widget">
-        <i class="fa-solid fa-music" style="color: #00f2fe;"></i>
-        <span style="font-size: 0.85rem; font-weight: 700;">Lofi Sadboy Storm</span>
+    <!-- Floating Audio Widget Tích Hợp Âm Thanh Thật -->
+    <div class="audio-player-widget" id="audioWidget" onclick="toggleAudioEngine()">
+        <i class="fa-solid fa-volume-xmark" id="audioIcon" style="color: #ff007a; font-size: 1.2rem;"></i>
+        <div>
+            <div style="font-size: 0.85rem; font-weight: 800;" id="audioStatus">Bấm để bật nhạc bão</div>
+            <div style="font-size: 0.7rem; color: var(--text-sub);">Spatial Audio Engine</div>
+        </div>
         <canvas class="visualizer-canvas" id="visualizerCanvas"></canvas>
     </div>
 
@@ -263,6 +267,7 @@
             if (Math.random() < 0.3) {
                 flashElem.style.opacity = '0.9';
                 setTimeout(() => { flashElem.style.opacity = '0'; }, 80);
+                if (isPlaying) playThunderSound();
             }
             setTimeout(triggerLightning, Math.random() * 4000 + 3000);
         }
@@ -303,14 +308,101 @@
             });
         }
 
+        /* WEB AUDIO API ENGINE - ÂM THANH MƯA BẢO & SẤM RỀN THẬT */
+        let audioCtx = null;
+        let isPlaying = false;
+        let rainNode = null;
+
+        function toggleAudioEngine() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const icon = document.getElementById('audioIcon');
+            const status = document.getElementById('audioStatus');
+
+            if (!isPlaying) {
+                startRainSound();
+                isPlaying = true;
+                icon.className = "fa-solid fa-volume-high";
+                icon.style.color = "#00f2fe";
+                status.innerText = "Đang phát Lofi Storm";
+            } else {
+                if (rainNode) rainNode.stop();
+                isPlaying = false;
+                icon.className = "fa-solid fa-volume-xmark";
+                icon.style.color = "#ff007a";
+                status.innerText = "Bấm để bật nhạc bão";
+            }
+        }
+
+        function startRainSound() {
+            const bufferSize = audioCtx.sampleRate * 2;
+            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const output = buffer.getChannelData(0);
+
+            for (let i = 0; i < bufferSize; i++) {
+                output[i] = Math.random() * 2 - 1;
+            }
+
+            rainNode = audioCtx.createBufferSource();
+            rainNode.buffer = buffer;
+            rainNode.loop = true;
+
+            const filter = audioCtx.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.value = 400;
+
+            const gain = audioCtx.createGain();
+            gain.gain.value = 0.15;
+
+            rainNode.connect(filter);
+            filter.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            rainNode.start();
+        }
+
+        function playThunderSound() {
+            if (!audioCtx || !isPlaying) return;
+            const bufferSize = audioCtx.sampleRate * 1.5;
+            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const output = buffer.getChannelData(0);
+
+            for (let i = 0; i < bufferSize; i++) {
+                output[i] = Math.random() * 2 - 1;
+            }
+
+            const whiteNoise = audioCtx.createBufferSource();
+            whiteNoise.buffer = buffer;
+
+            const filter = audioCtx.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(100, audioCtx.currentTime);
+            filter.frequency.exponentialRampToValueAtTime(30, audioCtx.currentTime + 1.2);
+
+            const gain = audioCtx.createGain();
+            gain.gain.setValueAtTime(0.6, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1.4);
+
+            whiteNoise.connect(filter);
+            filter.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            whiteNoise.start();
+        }
+
         /* AUDIO VISUALIZER SIMULATION */
         const visCanvas = document.getElementById('visualizerCanvas');
         const visCtx = visCanvas.getContext('2d');
         function drawVisualizer() {
             visCtx.clearRect(0, 0, visCanvas.width, visCanvas.height);
             for (let i = 0; i < 5; i++) {
-                let h = Math.random() * visCanvas.height;
-                visCtx.fillStyle = '#00f2fe';
+                let h = isPlaying ? Math.random() * visCanvas.height : 2;
+                visCtx.fillStyle = isPlaying ? '#00f2fe' : '#ff007a';
                 visCtx.fillRect(i * 12, visCanvas.height - h, 6, h);
             }
             setTimeout(drawVisualizer, 150);
