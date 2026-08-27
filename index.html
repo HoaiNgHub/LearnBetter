@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HNG ACADEMY - Học Tập & Giải Bài Tập Độc Quyền</title>
-    <!-- Google Fonts: Plus Jakarta Sans & Syne -->
+    <title>HNG ACADEMY - Storm Sadboy Cinematic Mode</title>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        /* ==================== RESET & SETUP ==================== */
         * {
             margin: 0;
             padding: 0;
@@ -22,11 +21,11 @@
         }
 
         :root {
-            --bg-color: #080B11;
-            --card-bg: rgba(18, 24, 38, 0.75);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --text-main: #FFFFFF;
-            --text-sub: #94A3B8;
+            --bg-color: #06090e;
+            --card-bg: rgba(15, 23, 42, 0.65);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
         }
 
         body {
@@ -38,12 +37,11 @@
             transition: background-color 0.5s ease;
         }
 
-        /* ==================== VŨ TRỤ BACKGROUND (DARK MODE BAN ĐẦU) ==================== */
+        /* ==================== STAGED BACKGROUND: VŨ TRỤ ==================== */
         .space-container {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none; z-index: 0; overflow: hidden;
-            background: radial-gradient(circle at 50% 20%, #0d1527 0%, #080B11 80%);
+            background: radial-gradient(circle at 50% 20%, #0f172a 0%, #06090e 80%);
             transition: opacity 0.8s ease;
         }
 
@@ -69,84 +67,80 @@
         .bg-glow-1 { top: -100px; left: 50%; transform: translateX(-50%); width: 800px; height: 400px; background: radial-gradient(circle, rgba(121, 40, 202, 0.35) 0%, rgba(0, 242, 254, 0.15) 50%, transparent 80%); }
         .bg-glow-2 { bottom: -150px; right: -100px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255, 215, 0, 0.12) 0%, rgba(255, 0, 122, 0.1) 50%, transparent 80%); }
 
-        /* ==================== THEME SADBOY ANIME (BẦU TRỜI TRẮNG XÁM + CƠN MƯA + CHÀNG TRAI SẦU) ==================== */
-        .sadboy-theme-container {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+        /* ==================== SADBOY STORM THEME (BẢO TỐ U BUỒN COMPLEX) ==================== */
+        .storm-theme-container {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none; z-index: 0; opacity: 0;
             transition: opacity 0.8s ease;
-            background: linear-gradient(to bottom, #d6dbe0 0%, #a3abcb 45%, #646e83 80%, #3e4452 100%);
+            background: linear-gradient(to bottom, #111827 0%, #1f2937 40%, #111827 85%, #030712 100%);
             overflow: hidden;
         }
 
-        /* Mây Mù Buồn Trắng Xám */
-        .sad-cloud {
-            position: absolute; background: rgba(235, 240, 245, 0.6);
-            border-radius: 100px; filter: blur(12px);
-            animation: cloudSad 50s linear infinite;
-        }
-        .sad-cloud-1 { top: 5%; width: 500px; height: 120px; left: -100px; }
-        .sad-cloud-2 { top: 15%; width: 700px; height: 150px; right: -150px; animation-duration: 65s; }
-        @keyframes cloudSad { 0% { transform: translateX(0); } 100% { transform: translateX(200px); } }
-
-        /* HIỆU ỨNG MƯA TRÚT XUỐNG SỐNG ĐỘNG */
-        .rain-container {
-            position: absolute; width: 100%; height: 100%;
-            top: 0; left: 0; pointer-events: none;
-        }
-        .drop {
-            position: absolute; background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.6));
-            width: 1px; height: 60px; opacity: 0.7;
-            animation: fall 0.7s linear infinite;
-        }
-        @keyframes fall {
-            0% { transform: translateY(-100px) translateX(0); }
-            100% { transform: translateY(100vh) translateX(-30px); }
+        /* Canvas hiệu ứng mưa bão & sấm chớp */
+        #stormCanvas {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 2; pointer-events: none;
         }
 
-        /* SVG Cảnh Đồi Núi U Buồn + Chàng Trai Ngồi Gục */
-        .sad-landscape-svg {
-            position: absolute; bottom: 0; width: 100%; height: 65vh;
+        /* Flash giật sét chớp toàn màn hình */
+        .lightning-flash {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.85); opacity: 0;
+            z-index: 1; pointer-events: none;
+            transition: opacity 0.05s ease-out;
         }
 
-        /* Cành Cây Khô Đung Đưa Trong Cơn Mưa */
-        .sad-tree {
+        /* Mây Bão Cuồn Cuộn */
+        .storm-cloud {
+            position: absolute; background: radial-gradient(circle, rgba(55, 65, 81, 0.8) 0%, rgba(17, 24, 39, 0.95) 80%);
+            border-radius: 50%; filter: blur(25px); z-index: 1;
+            animation: cloudChurn 18s ease-in-out infinite alternate;
+        }
+        .cloud-a { top: -80px; left: -100px; width: 800px; height: 280px; }
+        .cloud-b { top: -50px; right: -150px; width: 900px; height: 320px; animation-duration: 25s; }
+        @keyframes cloudChurn { 0% { transform: scale(1) translateX(0); } 100% { transform: scale(1.1) translateX(60px); } }
+
+        /* Khung Cảnh SVG Sadboy Bão Tố */
+        .storm-svg {
+            position: absolute; bottom: 0; width: 100%; height: 70vh; z-index: 3;
+        }
+
+        /* Cây Khô Đung Đưa Trong Cơn Bão */
+        .storm-tree {
             transform-origin: bottom center;
-            animation: sadWind 5s ease-in-out infinite alternate;
+            animation: violentWind 2.5s ease-in-out infinite alternate;
         }
-        @keyframes sadWind {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(-2deg); }
+        @keyframes violentWind {
+            0% { transform: rotate(0deg) skewX(0deg); }
+            50% { transform: rotate(-5deg) skewX(-4deg); }
+            100% { transform: rotate(-8deg) skewX(-7deg); }
         }
 
-        /* Chàng Trai Đen Thui Ngồi Thất Tình Gục Đầu */
-        .sad-boy {
+        /* Chàng trai gục đầu chịu trận mưa bão */
+        .sad-lonely-boy {
             transform-origin: bottom center;
-            animation: boySigh 3s ease-in-out infinite alternate;
+            animation: boyShiver 0.15s ease-in-out infinite alternate;
         }
-        @keyframes boySigh {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(1.5px); }
+        @keyframes boyShiver {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(0.8px) translateX(-0.5px); }
         }
 
-        /* KHI BẬT SADBOY MODE */
+        /* KHI BẬT THEME BẢO TỐ SADBOY */
         body.sadboy-mode {
-            --bg-color: #cbd5e1;
-            --card-bg: rgba(255, 255, 255, 0.65);
-            --card-border: rgba(0, 0, 0, 0.12);
-            --text-main: #1e293b;
-            --text-sub: #475569;
+            --bg-color: #0b0f17;
+            --card-bg: rgba(15, 23, 42, 0.75);
+            --card-border: rgba(56, 189, 248, 0.2);
+            --text-main: #f1f5f9;
+            --text-sub: #94a3b8;
         }
 
         body.sadboy-mode .space-container,
         body.sadboy-mode .bg-glow-1,
         body.sadboy-mode .bg-glow-2 { opacity: 0; }
-        body.sadboy-mode .sadboy-theme-container { opacity: 1; }
-        body.sadboy-mode header { background: rgba(255, 255, 255, 0.65); border-bottom-color: rgba(0,0,0,0.1); }
-        body.sadboy-mode .nav-logo { color: #0f172a; }
-        body.sadboy-mode .nav-links a { color: #334155; }
-        body.sadboy-mode .search-box { background: rgba(255, 255, 255, 0.85); border-color: rgba(100, 116, 139, 0.4); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); }
-        body.sadboy-mode .search-input { color: #0f172a; }
+        body.sadboy-mode .storm-theme-container { opacity: 1; }
+        body.sadboy-mode header { background: rgba(15, 23, 42, 0.75); border-bottom-color: rgba(56, 189, 248, 0.15); }
+        body.sadboy-mode .search-box { background: rgba(15, 23, 42, 0.85); border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 0 25px rgba(0, 0, 0, 0.5); }
 
         /* ==================== HEADER & NAVBAR ==================== */
         header {
@@ -174,12 +168,12 @@
         }
         @keyframes aiGlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        /* NÚT THAY ĐỔI GIAO DIỆN */
+        /* NÚT THAY ĐỔI GIAO DIỆN BÃO TỐ */
         .theme-toggle-btn { background: rgba(255, 255, 255, 0.08) !important; border: 1px solid var(--card-border) !important; padding: 8px 16px !important; border-radius: 20px !important; color: var(--text-main) !important; }
         .theme-toggle-btn:hover { background: rgba(0, 242, 254, 0.15) !important; border-color: #00f2fe !important; color: #00f2fe !important; }
 
         /* ==================== HERO SECTION ==================== */
-        .hero { position: relative; z-index: 1; text-align: center; padding: 70px 20px 40px; max-width: 1100px; margin: 0 auto; }
+        .hero { position: relative; z-index: 10; text-align: center; padding: 70px 20px 40px; max-width: 1100px; margin: 0 auto; }
         .main-title {
             font-family: 'Syne', sans-serif; font-size: clamp(3.2rem, 7.5vw, 6rem); font-weight: 800;
             letter-spacing: 2px; line-height: 1.05; text-transform: uppercase;
@@ -204,14 +198,14 @@
         .search-btn { background: linear-gradient(135deg, #00f2fe, #4facfe); border: none; color: #000; font-weight: 800; padding: 12px 26px; border-radius: 40px; cursor: pointer; }
 
         /* GRID CONTENT */
-        .main-container { max-width: 1280px; margin: 0 auto; padding: 0 24px 80px; position: relative; z-index: 1; }
+        .main-container { max-width: 1280px; margin: 0 auto; padding: 0 24px 80px; position: relative; z-index: 10; }
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 28px; }
         .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; overflow: hidden; backdrop-filter: blur(12px); transition: all 0.4s ease; padding: 22px; }
     </style>
 </head>
-<body>
+<body class="sadboy-mode">
 
-    <!-- THỂ LOẠI 1: BACKGROUND VŨ TRỤ BAN ĐẦU -->
+    <!-- THEME 1: VŨ TRỤ BAN ĐẦU -->
     <div class="space-container">
         <div class="stars"></div>
         <div class="shooting-star"></div>
@@ -220,49 +214,45 @@
     <div class="bg-glow-1"></div>
     <div class="bg-glow-2"></div>
 
-    <!-- THỂ LOẠI 2: SADBOY ANIME MODE - BẦU TRỜI TRẮNG XÁM + CƠN MƯA + CHÀNG TRAI THẤT TÌNH NGHĨ NGHẦN DƯỚI GỐC CÂY -->
-    <div class="sadboy-theme-container" id="sadboyTheme">
-        <!-- Mây mù xám trắng u uất -->
-        <div class="sad-cloud sad-cloud-1"></div>
-        <div class="sad-cloud sad-cloud-2"></div>
+    <!-- THEME 2: SADBOY ANIME BẢO TỐ CINEMATIC (SẤM CHỚP + MƯA BẢO NGHIÊNG + CHÀNG TRAI SẦU) -->
+    <div class="storm-theme-container">
+        <div class="lightning-flash" id="lightningFlash"></div>
+        <div class="storm-cloud cloud-a"></div>
+        <div class="storm-cloud cloud-b"></div>
+        
+        <!-- Canvas vẽ mưa bão & sét chuyên nghiệp -->
+        <canvas id="stormCanvas"></canvas>
 
-        <!-- Mưa trút xuống -->
-        <div class="rain-container" id="rainContainer"></div>
+        <!-- SVG Đồi Núi & Cây Bão Tố -->
+        <svg class="storm-svg" viewBox="0 0 1440 600" preserveAspectRatio="none">
+            <!-- Đồi núi xa u tối -->
+            <path fill="#111827" opacity="0.7" d="M0,280 C300,180 550,260 880,190 C1180,130 1320,240 1440,200 L1440,600 L0,600 Z"></path>
+            <!-- Đồi núi gần -->
+            <path fill="#0f172a" opacity="0.9" d="M0,350 C350,250 680,380 1080,280 C1280,230 1390,310 1440,320 L1440,600 L0,600 Z"></path>
+            <!-- Đồi cỏ chính u buồn -->
+            <path fill="#030712" d="M-100,430 C350,320 750,470 1540,360 L1540,600 L-100,600 Z"></path>
 
-        <!-- Phong cảnh SVG Sadboy -->
-        <svg class="sad-landscape-svg" viewBox="0 0 1440 600" preserveAspectRatio="none">
-            <!-- Đồi núi phía xa màu xám tím mờ -->
-            <path fill="#525b70" opacity="0.6" d="M0,320 C300,220 500,290 850,210 C1150,150 1300,270 1440,230 L1440,600 L0,600 Z"></path>
-            <!-- Đồi núi trung gian -->
-            <path fill="#3a4150" opacity="0.8" d="M0,370 C350,280 650,400 1050,300 C1250,250 1380,330 1440,340 L1440,600 L0,600 Z"></path>
-            <!-- Đồi tối phía trước -->
-            <path fill="#1e232d" d="M-100,440 C350,330 750,480 1540,370 L1540,600 L-100,600 Z"></path>
-
-            <!-- CÂY KHÔ ĐỘC HÀNH VÀ CHÀNG TRAI ĐEN THUI NGỒI GỤC ĐẦU -->
-            <g transform="translate(1020, 150)">
-                <!-- Thân & Cành cây sầu -->
-                <g class="sad-tree">
-                    <path d="M80,290 Q70,190 35,130 Q15,100 25,70 Q40,40 20,10 M25,70 Q-10,40 -40,50 M35,130 Q80,90 110,70 M75,180 Q130,150 150,130" stroke="#0f1217" stroke-width="12" stroke-linecap="round" fill="none"/>
-                    <!-- Tán lá thưa thớt u buồn -->
-                    <circle cx="20" cy="10" r="25" fill="#181d26" opacity="0.7"/>
-                    <circle cx="-40" cy="50" r="30" fill="#181d26" opacity="0.6"/>
-                    <circle cx="110" cy="70" r="35" fill="#181d26" opacity="0.8"/>
+            <!-- CÂY KHÔ NGHIÊNG NGẢ TRONG BẢO & CHÀNG TRAI SADBOY -->
+            <g transform="translate(1040, 130)">
+                <!-- Thân cây khô bão giằng xé -->
+                <g class="storm-tree">
+                    <path d="M90,310 Q75,200 30,130 Q10,90 20,50 Q35,20 10,-20 M20,50 Q-20,20 -50,30 M30,130 Q90,90 120,60 M80,190 Q140,150 160,120" stroke="#030712" stroke-width="15" stroke-linecap="round" fill="none"/>
+                    <!-- Tán lá rách nát bão cuốn -->
+                    <circle cx="10" cy="-20" r="20" fill="#0f172a" opacity="0.8"/>
+                    <circle cx="-50" cy="30" r="25" fill="#0f172a" opacity="0.7"/>
+                    <circle cx="120" cy="60" r="30" fill="#0f172a" opacity="0.9"/>
                 </g>
 
-                <!-- CHÀNG TRAI ĐEN THUI (SILHOUETTE) NGỒI GỤC ĐẦU THẤT TÌNH DƯỚI GỐC CÂY -->
-                <g class="sad-boy" transform="translate(-10, 235)">
-                    <!-- Bóng ngồi trên mặt đất -->
-                    <ellipse cx="25" cy="50" rx="22" ry="5" fill="#080a0d" opacity="0.8"/>
-                    
-                    <!-- Dáng ngồi bó gối co ro gục đầu -->
-                    <!-- Lưng cong buồn -->
-                    <path d="M10,48 C10,30 18,22 28,22 C38,22 42,32 40,48 Z" fill="#0b0e14"/>
-                    <!-- Đầu gục xuống cằm chạm gối -->
-                    <circle cx="32" cy="18" r="9" fill="#0b0e14"/>
-                    <!-- Tay ôm lấy đầu gối -->
-                    <path d="M18,35 C28,30 38,36 36,46" stroke="#0b0e14" stroke-width="5" stroke-linecap="round" fill="none"/>
-                    <!-- Tóc anime rũ xuống -->
-                    <path d="M26,12 Q30,16 34,13 Q35,18 38,15" stroke="#0b0e14" stroke-width="3" fill="none"/>
+                <!-- CHÀNG TRAI SADBOY NGỒI GỤC ĐẦU CÔ ĐƠN CHỊU BẢO -->
+                <g class="sad-lonely-boy" transform="translate(-20, 260)">
+                    <ellipse cx="25" cy="52" rx="26" ry="6" fill="#000000" opacity="0.9"/>
+                    <!-- Dáng người gục đầu chịu mưa -->
+                    <path d="M8,50 C8,28 18,18 30,18 C42,18 46,30 44,50 Z" fill="#020617"/>
+                    <circle cx="34" cy="14" r="10" fill="#020617"/>
+                    <!-- Tay ôm co ro -->
+                    <path d="M16,36 C28,30 38,38 36,48" stroke="#020617" stroke-width="6" stroke-linecap="round" fill="none"/>
+                    <!-- Tóc anime rũ bết do mưa -->
+                    <path d="M26,8 Q30,14 36,10 Q37,16 42,12" stroke="#020617" stroke-width="3" fill="none"/>
                 </g>
             </g>
         </svg>
@@ -277,17 +267,17 @@
         <ul class="nav-links">
             <li><a href="#" class="active"><i class="fa-solid fa-house"></i> Trang Chủ</a></li>
             
-            <!-- NÚT AI CHAT RGB NỔI BẬT -->
+            <!-- NÚT AI CHAT RGB -->
             <li>
                 <a href="#aichat" class="ai-chat-btn">
                     <i class="fa-solid fa-robot"></i> AI CHAT
                 </a>
             </li>
 
-            <!-- NÚT ĐỔI GIAO DIỆN -->
+            <!-- NÚT THAY ĐỔI GIAO DIỆN -->
             <li>
                 <button class="nav-btn theme-toggle-btn" onclick="toggleTheme()">
-                    <i class="fa-solid fa-cloud-rain" style="color: #00f2fe;"></i> Giao diện
+                    <i class="fa-solid fa-bolt" style="color: #38bdf8;"></i> Giao diện
                 </button>
             </li>
 
@@ -306,7 +296,7 @@
         <!-- THANH TÌM KIẾM -->
         <div class="search-container">
             <div class="search-box">
-                <i class="fa-solid fa-magnifying-glass" style="color: #00f2fe; margin-right: 12px;"></i>
+                <i class="fa-solid fa-magnifying-glass" style="color: #38bdf8; margin-right: 12px;"></i>
                 <input type="text" class="search-input" placeholder="Tìm kiếm nội dung học tập, mã nguồn...">
                 <button class="search-btn">Tìm kiếm</button>
             </div>
@@ -317,7 +307,7 @@
     <main class="main-container">
         <div class="cards-grid">
             <div class="card">
-                <h3><i class="fa-solid fa-code" style="color: #00f2fe;"></i> Kho Lập Trình Tối Ưu</h3>
+                <h3><i class="fa-solid fa-code" style="color: #38bdf8;"></i> Kho Lập Trình Tối Ưu</h3>
                 <p style="margin-top: 10px; color: var(--text-sub);">Nơi chia sẻ kiến thức và giải thuật tối ưu bởi HNG/HoàiNg.</p>
             </div>
             <div class="card">
@@ -325,29 +315,90 @@
                 <p style="margin-top: 10px; color: var(--text-sub);">Hỏi đáp bài tập, giải code tức thì với AI thông minh tích hợp sẵn.</p>
             </div>
             <div class="card">
-                <h3><i class="fa-solid fa-cloud-moon" style="color: #a855f7;"></i> Mood Anime Sadboy</h3>
-                <p style="margin-top: 10px; color: var(--text-sub);">Chuyển đổi giao diện cơn mưa sầu u buồn chill đượm chất Anime.</p>
+                <h3><i class="fa-solid fa-cloud-showers-heavy" style="color: #38bdf8;"></i> Sadboy Storm Cinematic</h3>
+                <p style="margin-top: 10px; color: var(--text-sub);">Giao diện bão tố u buồn phức tạp đỉnh cao với Canvas Rain Engine & Lightning flash.</p>
             </div>
         </div>
     </main>
 
-    <!-- JavaScript Tạo Mưa & Đổi Giao Diện -->
+    <!-- CANVAS ANIMATION ENGINE: MƯA BẢO NGHIÊNG TẠT + SẤM CHỚP TỰ ĐỘNG -->
     <script>
-        // Tạo hạt mưa ngẫu nhiên
-        const rainContainer = document.getElementById('rainContainer');
-        const dropCount = 60;
+        const canvas = document.getElementById('stormCanvas');
+        const ctx = canvas.getContext('2d');
+        const flashElem = document.getElementById('lightningFlash');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        // Cấu hình hạt mưa bão
+        const rainDrops = [];
+        const dropCount = 220; // Hơn 200 hạt mưa tạt dồn dập
 
         for (let i = 0; i < dropCount; i++) {
-            const drop = document.createElement('div');
-            drop.classList.add('drop');
-            drop.style.left = `${Math.random() * 100}%`;
-            drop.style.animationDuration = `${0.5 + Math.random() * 0.5}s`;
-            drop.style.animationDelay = `${Math.random() * 2}s`;
-            drop.style.height = `${40 + Math.random() * 40}px`;
-            rainContainer.appendChild(drop);
+            rainDrops.push({
+                x: Math.random() * width * 1.5 - width * 0.2,
+                y: Math.random() * height,
+                length: Math.random() * 35 + 20,
+                speed: Math.random() * 18 + 14,
+                opacity: Math.random() * 0.4 + 0.2,
+                wind: Math.random() * 4 + 6 // Nghiêng theo gió bão
+            });
         }
 
-        // Toggle giao diện Sadboy
+        // Vẽ mưa bão dồn dập
+        function drawRain() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < dropCount; i++) {
+                const d = rainDrops[i];
+
+                ctx.beginPath();
+                ctx.moveTo(d.x, d.y);
+                ctx.lineTo(d.x - d.wind * 2, d.y + d.length);
+                ctx.strokeStyle = `rgba(186, 230, 253, ${d.opacity})`;
+                ctx.lineWidth = 1.2;
+                ctx.stroke();
+
+                d.y += d.speed;
+                d.x -= d.wind;
+
+                if (d.y > height) {
+                    d.y = -d.length;
+                    d.x = Math.random() * width * 1.5 - width * 0.2;
+                }
+            }
+            requestAnimationFrame(drawRain);
+        }
+
+        drawRain();
+
+        // Tự động kích hoạt Sấm Chớp Giật Điện ngẫu nhiên
+        function triggerLightning() {
+            if (document.body.classList.contains('sadboy-mode')) {
+                // Tỷ lệ giật sét
+                if (Math.random() < 0.3) {
+                    flashElem.style.opacity = '0.7';
+                    setTimeout(() => { flashElem.style.opacity = '0'; }, 60);
+                    setTimeout(() => {
+                        if (Math.random() > 0.5) {
+                            flashElem.style.opacity = '0.9';
+                            setTimeout(() => { flashElem.style.opacity = '0'; }, 40);
+                        }
+                    }, 100);
+                }
+            }
+            // Hẹn giờ chớp giật tiếp theo ngẫu nhiên từ 3 - 7 giây
+            setTimeout(triggerLightning, Math.random() * 4000 + 3000);
+        }
+
+        triggerLightning();
+
+        // Toggle giao diện
         function toggleTheme() {
             document.body.classList.toggle('sadboy-mode');
         }
