@@ -230,7 +230,6 @@
             </div>
 
             <form id="feedbackForm" onsubmit="submitFeedback(event)">
-                <!-- WEB3FORMS ACCESS KEY RIÊNG BIỆT DÀNH CHO EMAIL -->
                 <input type="hidden" name="access_key" value="b99a548e-7ae5-4031-9603-dd6af26ae6b2">
                 <input type="hidden" name="subject" value="Góp Ý Mới Từ HNG ACADEMY">
 
@@ -268,7 +267,7 @@
             <div class="ai-chat-header">
                 <div class="ai-chat-title">
                     <i class="fa-solid fa-robot"></i>
-                    <span>AI Chat Studio (Gemini 2.5)</span>
+                    <span>AI Chat Studio (Gemini 3.6)</span>
                 </div>
                 <button class="close-btn" onclick="closeAiChatModal()"><i class="fa-solid fa-xmark"></i></button>
             </div>
@@ -288,7 +287,7 @@
 
     <!-- JavaScript Master Engine -->
     <script>
-        /* GEMINI API CONFIGURATION (API KEY RIÊNG BIỆT DÀNH CHO GEMINI CHATBOT) */
+        /* GEMINI API CONFIGURATION */
         const GEMINI_API_KEY = "AQ.Ab8RN6Lqu3yleHxa2PFSYwLDgOZ5d7DbnjiFKnhxOj0cSyRaVA";
         
         function openAiChatModal() {
@@ -327,8 +326,8 @@
             chatBody.scrollTop = chatBody.scrollHeight;
 
             try {
-                // Gọi API Gemini REST Endpoint
-                const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+                // ĐÃ CẬP NHẬT: Model gemini-3.6-flash chuẩn mới
+                const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${GEMINI_API_KEY}`;
                 
                 const response = await fetch(endpoint, {
                     method: 'POST',
