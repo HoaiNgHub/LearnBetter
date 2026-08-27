@@ -3,74 +3,756 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài Tập & Hướng Dẫn Giải</title>
+    <title>HNG ACADEMY - Học Tập & Giải Bài Tập Độc Quyền</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
+        /* ==================== RESET & SETUP ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg-color: #080B11;
+            --card-bg: rgba(18, 24, 38, 0.75);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --accent-glow: #00f2fe;
+            --text-main: #FFFFFF;
+            --text-sub: #94A3B8;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f4f6f9;
-            color: #333;
-        }
-        .card {
-            background: #ffffff;
-            padding: 24px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #0969da;
-        }
-        .video-container {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
             position: relative;
-            padding-bottom: 56.25%; /* Tỉ lệ 16:9 */
-            height: 0;
-            overflow: hidden;
-            border-radius: 6px;
-            margin: 20px 0;
         }
-        .video-container iframe {
-            position: absolute;
+
+        /* Ambient Background Glows */
+        .bg-glow-1 {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(121, 40, 202, 0.35) 0%, rgba(0, 242, 254, 0.15) 50%, transparent 80%);
+            filter: blur(90px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-glow-2 {
+            position: fixed;
+            bottom: -150px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.12) 0%, rgba(255, 0, 122, 0.1) 50%, transparent 80%);
+            filter: blur(100px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080B11;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+
+        /* ==================== HEADER & NAVBAR ==================== */
+        header {
+            position: sticky;
             top: 0;
-            left: 0;
+            z-index: 100;
+            background: rgba(8, 11, 17, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--card-border);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.25rem;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .nav-logo-badge {
+            background: linear-gradient(135deg, #7928CA, #FF007A);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(255, 0, 122, 0.4);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #00f2fe;
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 70px 20px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Tiêu đề HNG ACADEMY Sặc Sỡ Nổi Bật */
+        .main-title {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #FF007A 0%, #7928CA 25%, #00DFD8 60%, #FFD700 100%);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: vibrantGradient 6s ease infinite;
+            filter: drop-shadow(0 6px 25px rgba(121, 40, 202, 0.45));
+            margin-bottom: 18px;
+        }
+
+        @keyframes vibrantGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Tiêu đề phụ + Chữ Gold chạy chạy */
+        .subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+            color: #cbd5e1;
+            font-weight: 500;
+            margin-bottom: 40px;
+            letter-spacing: 0.5px;
+        }
+
+        /* HIỆU ỨNG VÀNG SHIMMER CHẠY LIÊN TỤC CHO HNG/HoàiNg */
+        .gold-running-text {
+            position: relative;
+            font-weight: 900;
+            font-size: 1.1em;
+            background: linear-gradient(
+                90deg, 
+                #bf953f 0%, 
+                #fcf6ba 20%, 
+                #b38728 40%, 
+                #fbf5b7 60%, 
+                #aa771c 80%, 
+                #bf953f 100%
+            );
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: goldShimmer 2.2s linear infinite;
+            display: inline-block;
+            filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.6));
+            padding: 0 4px;
+        }
+
+        @keyframes goldShimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* ==================== SEARCH BAR ==================== */
+        .search-container {
+            max-width: 680px;
+            margin: 0 auto 35px;
+            position: relative;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(18, 24, 38, 0.85);
+            border: 2px solid rgba(0, 242, 254, 0.25);
+            border-radius: 50px;
+            padding: 8px 12px 8px 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(0, 242, 254, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus-within {
+            border-color: #00f2fe;
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.4), inset 0 0 20px rgba(0, 242, 254, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .search-box i.search-icon {
+            color: #00f2fe;
+            font-size: 1.2rem;
+            margin-right: 14px;
+        }
+
+        .search-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        .search-input::placeholder {
+            color: #64748b;
+        }
+
+        .search-btn {
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            border: none;
+            color: #000;
+            font-weight: 800;
+            padding: 12px 26px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4);
+        }
+
+        .search-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 242, 254, 0.6);
+        }
+
+        /* ==================== CATEGORIES (CÁC MỤC NHỎ) ==================== */
+        .categories-wrapper {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 50px;
+        }
+
+        .category-chip {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid var(--card-border);
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-chip:hover, .category-chip.active {
+            background: linear-gradient(135deg, rgba(121, 40, 202, 0.3), rgba(0, 242, 254, 0.2));
+            border-color: #00f2fe;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* ==================== CONTENT GRID & CARDS ==================== */
+        .main-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title i {
+            color: #FFD700;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 28px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 242, 254, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 242, 254, 0.2);
+        }
+
+        .card-preview {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: #0f172a;
+            overflow: hidden;
+        }
+
+        .card-preview img {
             width: 100%;
             height: 100%;
-            border: 0;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
-        .download-btn {
-            display: inline-block;
-            background-color: #2da44e;
-            color: white;
-            padding: 12px 20px;
+
+        .card:hover .card-preview img {
+            transform: scale(1.08);
+        }
+
+        .card-tag {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: rgba(8, 11, 17, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            color: #00f2fe;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .play-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .play-btn {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF007A, #7928CA);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            box-shadow: 0 0 20px rgba(255, 0, 122, 0.6);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.15);
+        }
+
+        .card-content {
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+            line-height: 1.4;
+        }
+
+        .card-desc {
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            gap: 10px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
             text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            transition: background 0.2s;
         }
-        .download-btn:hover {
-            background-color: #2c974b;
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            color: #080B11;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            border: 1px solid var(--card-border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #00f2fe;
+            transform: translateY(-2px);
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            border-top: 1px solid var(--card-border);
+            background: rgba(8, 11, 17, 0.95);
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer strong {
+            color: #fff;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1e293b;
+            border: 1px solid #00f2fe;
+            color: #fff;
+            padding: 14px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <h1>Bài 01: Hướng Dẫn Giải Bài Tập</h1>
-        <p>Xem video hướng dẫn chi tiết bên dưới và tải tệp bài tập thực hành về máy.</p>
+    <!-- Ambient Glow Effects -->
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
 
-        <!-- Khung nhúng Video YouTube -->
-        <div class="video-container">
-            <!-- Thay ID video YouTube của bạn vào vị trí VIDEO_ID -->
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+    <!-- Header / Navbar -->
+    <header>
+        <a href="#" class="nav-logo">
+            <span class="nav-logo-badge">HNG</span>
+            <span>ACADEMY</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#" class="active"><i class="fa-solid fa-house"></i> Trang Chủ</a></li>
+            <li><a href="#lessons"><i class="fa-solid fa-play"></i> Video Giải Bài</a></li>
+            <li><a href="#exercises"><i class="fa-solid fa-file-arrow-down"></i> File Bài Tập</a></li>
+            <li><a href="#about"><i class="fa-solid fa-shield-halved"></i> Bản Quyền</a></li>
+        </ul>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- TIÊU ĐỀ SẶC SỠ NỔI BẬT -->
+        <h1 class="main-title">HNG ACADEMY</h1>
+        
+        <!-- TIÊU ĐỀ PHỤ VỚI HIỆU ỨNG VÀNG SHIMMER DÀNH CHO HNG/HoàiNg -->
+        <p class="subtitle">
+            Trang Web được sáng lập và Độc Quyền bởi 
+            <span class="gold-running-text">HNG/HoàiNg</span>
+        </p>
+
+        <!-- THANH TÌM KIẾM ĐẲNG CẤP -->
+        <div class="search-container">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm video hướng dẫn, đề thi, file bài tập PDF..." onkeyup="filterContent()">
+                <button class="search-btn" onclick="filterContent()">Tìm kiếm</button>
+            </div>
         </div>
 
-        <!-- Nút tải file bài tập -->
-        <!-- Thay tailieu.pdf bằng tên file thực tế bạn lưu trong cùng thư mục -->
-        <a href="tailieu.pdf" download class="download-btn">
-            📥 Tải File Bài Tập (.PDF)
-        </a>
+        <!-- CÁC MỤC NHỎ (CATEGORIES / TỪ KHÓA LỌC) -->
+        <div class="categories-wrapper">
+            <div class="category-chip active" onclick="selectCategory('all', this)"><i class="fa-solid fa-layer-group"></i> Tất Cả</div>
+            <div class="category-chip" onclick="selectCategory('video', this)"><i class="fa-solid fa-circle-play"></i> Video Bài Giảng</div>
+            <div class="category-chip" onclick="selectCategory('pdf', this)"><i class="fa-solid fa-file-pdf"></i> File Bài Tập PDF</div>
+            <div class="category-chip" onclick="selectCategory('code', this)"><i class="fa-solid fa-code"></i> Mã Nguồn & Code</div>
+            <div class="category-chip" onclick="selectCategory('exam', this)"><i class="fa-solid fa-graduation-cap"></i> Đề Thi Thử</div>
+        </div>
+    </section>
+
+    <!-- Content Grid Section -->
+    <main class="main-container">
+        <div class="section-header">
+            <h2 class="section-title"><i class="fa-solid fa-bolt"></i> Kho Tài Liệu & Bài Học Mới Nhất</h2>
+            <span style="color: var(--text-sub); font-size: 0.9rem;" id="itemCount">Hiển thị 6 bài học</span>
+        </div>
+
+        <div class="cards-grid" id="cardsGrid">
+            
+            <!-- Card 1 -->
+            <div class="card" data-category="video code" data-title="giải thuật toán đồ thị c++ lập trình">
+                <div class="card-preview">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format&fit=crop" alt="Thumbnail">
+                    <span class="card-tag">Video + Code</span>
+                    <div class="play-overlay">
+                        <div class="play-btn" onclick="openVideo('dQw4w9WgXcQ')"><i class="fa-solid fa-play"></i></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Bài 01: Hướng Dẫn Giải Thuật Toán Đồ Thị C++</h3>
+                    <p class="card-desc">Video giải chi tiết các dạng bài tập tìm đường đi ngắn nhất (Dijkstra) kèm file code mẫu chuẩn tối ưu.</p>
+                    <div class="card-footer">
+                        <button class="btn-action btn-primary" onclick="triggerDownload('Bai01_DoThi_CPlusPlus.pdf')"><i class="fa-solid fa-download"></i> Tải PDF</button>
+                        <button class="btn-action btn-secondary" onclick="triggerDownload('Bai01_SourceCode.zip')"><i class="fa-solid fa-file-code"></i> Tải Code</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card" data-category="pdf exam" data-title="bộ đề thi python căn bản nâng cao">
+                <div class="card-preview">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop" alt="Thumbnail">
+                    <span class="card-tag">Tài Liệu PDF</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Bộ Đề Thi Lập Trình Python Căn Bản 2026</h3>
+                    <p class="card-desc">Tổng hợp 50 bài tập Python có đáp án giải thích chi tiết, phù hợp cho học sinh, sinh viên ôn luyện.</p>
+                    <div class="card-footer">
+                        <button class="btn-action btn-primary" onclick="triggerDownload('BoDe_Python_2026.pdf')"><i class="fa-solid fa-download"></i> Tải Đề PDF</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card" data-category="video pdf" data-title="giải đề thi học sinh giỏi hsg quốc gia">
+                <div class="card-preview">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&auto=format&fit=crop" alt="Thumbnail">
+                    <span class="card-tag">Video + PDF</span>
+                    <div class="play-overlay">
+                        <div class="play-btn" onclick="openVideo('dQw4w9WgXcQ')"><i class="fa-solid fa-play"></i></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Chữa Đề Thi HSG Tin Học Chuyên Đề Quy Hoạch Động</h3>
+                    <p class="card-desc">Phân tích tư duy tối ưu thuật toán quy hoạch động (Dynamic Programming) cấp độ thi Học Sinh Giỏi.</p>
+                    <div class="card-footer">
+                        <button class="btn-action btn-primary" onclick="triggerDownload('DeThi_QuyHoachDong.pdf')"><i class="fa-solid fa-download"></i> Tải File PDF</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="card" data-category="code video" data-title="cấu trúc dữ liệu cây binary tree html css javascript">
+                <div class="card-preview">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop" alt="Thumbnail">
+                    <span class="card-tag">Mã Nguồn</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Cấu Trúc Dữ Liệu Cây (Binary Tree) & Ứng Dụng</h3>
+                    <p class="card-desc">Mã nguồn trực quan hóa cây nhị tìm kiếm bằng JavaScript tương tác cực sinh động.</p>
+                    <div class="card-footer">
+                        <button class="btn-action btn-primary" onclick="triggerDownload('BinaryTree_Demo.zip')"><i class="fa-solid fa-file-zipper"></i> Tải Source Code</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="card" data-category="exam pdf" data-title="đề thi thử cấu trúc dữ liệu giải thuật">
+                <div class="card-preview">
+                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&auto=format&fit=crop" alt="Thumbnail">
+                    <span class="card-tag">Đề Thi Thử</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Đề Thi Giữa Kỳ Cấu Trúc Dữ Liệu & Giải Thuật</h3>
+                    <p class="card-desc">Đề thi mẫu gồm 40 câu trắc nghiệm và 3 bài tự luận lập trình thực hành có kèm ma trận đề.</p>
+                    <div class="card-footer">
+                        <button class="btn-action btn-primary" onclick="triggerDownload('DeThi_CTDL_GK.pdf')"><i class="fa-solid fa-download"></i> Tải Đề PDF</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="card" data-category="video code" data-title="lập trình web github pages html css">
+                <div class="card-preview">
+                    <img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=600&auto=format&fit=crop" alt="Thumbnail">
+                    <span class="card-tag">Video Giảng</span>
+                    <div class="play-overlay">
+                        <div class="play-btn" onclick="openVideo('dQw4w9WgXcQ')"><i class="fa-solid fa-play"></i></div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Hướng Dẫn Deploy Trang Web Lên GitHub Pages</h3>
+                    <p class="card-desc">Các bước đưa website cá nhân lên mạng miễn phí 100% bằng GitHub đơn giản nhất.</p>
+                    <div class="card-footer">
+                        <button class="btn-action btn-primary" onclick="triggerDownload('HuongDan_GitHub.pdf')"><i class="fa-solid fa-download"></i> Tải Tài Liệu</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="about">
+        <p style="margin-bottom: 8px;">Trang Web được sáng lập và Độc Quyền bởi <span class="gold-running-text">HNG/HoàiNg</span></p>
+        <p>© 2026 <strong>HNG ACADEMY</strong>. All Rights Reserved. Lưu trữ & Phát hành trên GitHub Pages.</p>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <i class="fa-solid fa-circle-check" style="color: #00f2fe; font-size: 1.3rem;"></i>
+        <span id="toastMsg">Đang chuẩn bị tải xuống file bài tập...</span>
     </div>
 
+    <!-- JavaScript Logic -->
+    <script>
+        // Tìm kiếm và Lọc dữ liệu
+        function filterContent() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                const matchesSearch = title.includes(query);
+                
+                // Lấy category đang chọn
+                const activeChip = document.querySelector('.category-chip.active');
+                const selectedCategory = activeChip ? activeChip.getAttribute('onclick').match(/'([^']+)'/)[1] : 'all';
+                const cardCategories = card.getAttribute('data-category');
+
+                const matchesCategory = selectedCategory === 'all' || cardCategories.includes(selectedCategory);
+
+                if (matchesSearch && matchesCategory) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            document.getElementById('itemCount').innerText = `Hiển thị ${visibleCount} bài học`;
+        }
+
+        // Lọc theo mục (Category Chip)
+        function selectCategory(category, element) {
+            document.querySelectorAll('.category-chip').forEach(chip => chip.classList.remove('active'));
+            element.classList.add('active');
+            filterContent();
+        }
+
+        // Giả lập Tải file + Hiển thị Toast
+        function triggerDownload(fileName) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.innerText = `Đang tải xuống: ${fileName}`;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Mở Video YouTube
+        function openVideo(videoId) {
+            window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+        }
+    </script>
 </body>
 </html>
