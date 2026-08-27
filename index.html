@@ -38,34 +38,26 @@
             transition: background-color 0.5s ease;
         }
 
-        /* ==================== VŨ TRỤ BACKGROUND ==================== */
+        /* ==================== VŨ TRỤ BACKGROUND (DARK MODE BAN ĐẦU) ==================== */
         .space-container {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 0; overflow: hidden;
             background: radial-gradient(circle at 50% 20%, #0d1527 0%, #080B11 80%);
             transition: opacity 0.8s ease;
         }
 
         .stars {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: transparent url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><circle cx="100" cy="150" r="1.5" fill="%23ffffff" opacity="0.8"/><circle cx="300" cy="80" r="1" fill="%2300f2fe" opacity="0.6"/><circle cx="650" cy="220" r="2" fill="%23ffffff" opacity="0.9"/><circle cx="500" cy="450" r="1" fill="%23ffe066" opacity="0.7"/></svg>') repeat;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: transparent url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><circle cx="100" cy="150" r="1.5" fill="%23ffffff" opacity="0.8"/><circle cx="300" cy="80" r="1" fill="%2300f2fe" opacity="0.6"/><circle cx="650" cy="220" r="2" fill="%23ffffff" opacity="0.9"/></svg>') repeat;
             animation: twinkle 4s ease-in-out infinite alternate;
         }
-
         @keyframes twinkle { 0% { opacity: 0.3; } 100% { opacity: 1; } }
 
         .shooting-star {
             position: absolute; top: 50%; left: 50%; height: 2px;
             background: linear-gradient(-45deg, rgba(0, 242, 254, 1), rgba(255, 255, 255, 0));
-            animation: tail 3s ease-in-out infinite, shooting 3s ease-in-out infinite;
-            opacity: 0;
+            animation: tail 3s ease-in-out infinite, shooting 3s ease-in-out infinite; opacity: 0;
         }
         .shooting-star:nth-child(1) { top: -10%; left: 30%; animation-delay: 0s; animation-duration: 3.5s; }
         .shooting-star:nth-child(2) { top: -5%; left: 60%; animation-delay: 1.2s; animation-duration: 4s; }
@@ -73,184 +65,133 @@
         @keyframes tail { 0% { width: 0; } 30% { width: 150px; } 100% { width: 0; } }
         @keyframes shooting { 0% { transform: translateX(0) translateY(0) rotate(45deg); opacity: 1; } 100% { transform: translateX(1000px) translateY(1000px) rotate(45deg); opacity: 0; } }
 
-        .bg-glow-1, .bg-glow-2 {
-            position: fixed; pointer-events: none; z-index: 0; filter: blur(90px); transition: opacity 0.8s ease;
-        }
+        .bg-glow-1, .bg-glow-2 { position: fixed; pointer-events: none; z-index: 0; filter: blur(90px); transition: opacity 0.8s ease; }
         .bg-glow-1 { top: -100px; left: 50%; transform: translateX(-50%); width: 800px; height: 400px; background: radial-gradient(circle, rgba(121, 40, 202, 0.35) 0%, rgba(0, 242, 254, 0.15) 50%, transparent 80%); }
         .bg-glow-2 { bottom: -150px; right: -100px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255, 215, 0, 0.12) 0%, rgba(255, 0, 122, 0.1) 50%, transparent 80%); }
 
-        /* ==================== THEME BỜ ĐỒI XANH SỐNG ĐỘNG ==================== */
-        .hill-theme-container {
+        /* ==================== THEME SADBOY ANIME (BẦU TRỜI TRẮNG XÁM + CƠN MƯA + CHÀNG TRAI SẦU) ==================== */
+        .sadboy-theme-container {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0;
+            pointer-events: none; z-index: 0; opacity: 0;
             transition: opacity 0.8s ease;
-            background: linear-gradient(to bottom, #7ee8fa 0%, #e0c3fc 60%, #e2d4f7 100%);
+            background: linear-gradient(to bottom, #d6dbe0 0%, #a3abcb 45%, #646e83 80%, #3e4452 100%);
             overflow: hidden;
         }
 
-        /* Mây trôi */
-        .cloud {
-            position: absolute; background: rgba(255, 255, 255, 0.85);
-            border-radius: 50px; filter: blur(3px);
-            animation: cloudMove linear infinite;
+        /* Mây Mù Buồn Trắng Xám */
+        .sad-cloud {
+            position: absolute; background: rgba(235, 240, 245, 0.6);
+            border-radius: 100px; filter: blur(12px);
+            animation: cloudSad 50s linear infinite;
         }
-        .cloud::before, .cloud::after { content: ''; position: absolute; background: rgba(255, 255, 255, 0.85); border-radius: 50%; }
-        .cloud-1 { top: 10%; width: 140px; height: 40px; animation-duration: 35s; left: -150px; }
-        .cloud-1::before { width: 50px; height: 50px; top: -20px; left: 20px; }
-        .cloud-1::after { width: 40px; height: 40px; top: -15px; right: 20px; }
+        .sad-cloud-1 { top: 5%; width: 500px; height: 120px; left: -100px; }
+        .sad-cloud-2 { top: 15%; width: 700px; height: 150px; right: -150px; animation-duration: 65s; }
+        @keyframes cloudSad { 0% { transform: translateX(0); } 100% { transform: translateX(200px); } }
 
-        .cloud-2 { top: 22%; width: 200px; height: 50px; animation-duration: 45s; animation-delay: -15s; left: -220px; }
-        .cloud-2::before { width: 70px; height: 70px; top: -30px; left: 30px; }
-        .cloud-2::after { width: 50px; height: 50px; top: -20px; right: 30px; }
-
-        @keyframes cloudMove { 0% { transform: translateX(0); } 100% { transform: translateX(calc(100vw + 300px)); } }
-
-        /* Khung cảnh SVG Đồi Núi, Cây & Đứa Trẻ */
-        .landscape-svg {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 65vh;
+        /* HIỆU ỨNG MƯA TRÚT XUỐNG SỐNG ĐỘNG */
+        .rain-container {
+            position: absolute; width: 100%; height: 100%;
+            top: 0; left: 0; pointer-events: none;
+        }
+        .drop {
+            position: absolute; background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.6));
+            width: 1px; height: 60px; opacity: 0.7;
+            animation: fall 0.7s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100px) translateX(0); }
+            100% { transform: translateY(100vh) translateX(-30px); }
         }
 
-        /* Hiệu ứng Gió Rung Lá Cây */
-        .tree-leaves {
+        /* SVG Cảnh Đồi Núi U Buồn + Chàng Trai Ngồi Gục */
+        .sad-landscape-svg {
+            position: absolute; bottom: 0; width: 100%; height: 65vh;
+        }
+
+        /* Cành Cây Khô Đung Đưa Trong Cơn Mưa */
+        .sad-tree {
             transform-origin: bottom center;
-            animation: windBlow 3.5s ease-in-out infinite alternate;
+            animation: sadWind 5s ease-in-out infinite alternate;
         }
-        @keyframes windBlow {
-            0% { transform: rotate(0deg) skewX(0deg); }
-            50% { transform: rotate(2.5deg) skewX(2deg); }
-            100% { transform: rotate(-1.5deg) skewX(-1deg); }
+        @keyframes sadWind {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-2deg); }
         }
 
-        /* Đứa trẻ ngồi suy nghĩ */
-        .thinking-kid {
+        /* Chàng Trai Đen Thui Ngồi Thất Tình Gục Đầu */
+        .sad-boy {
             transform-origin: bottom center;
-            animation: kidBreath 4s ease-in-out infinite alternate;
+            animation: boySigh 3s ease-in-out infinite alternate;
         }
-        @keyframes kidBreath {
-            0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(-2px) rotate(1deg); }
+        @keyframes boySigh {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(1.5px); }
         }
 
-        /* Chế độ Hill Theme được bật */
-        body.hill-mode {
-            --bg-color: #f1f5f9;
-            --card-bg: rgba(255, 255, 255, 0.75);
-            --card-border: rgba(0, 0, 0, 0.1);
-            --text-main: #0f172a;
+        /* KHI BẬT SADBOY MODE */
+        body.sadboy-mode {
+            --bg-color: #cbd5e1;
+            --card-bg: rgba(255, 255, 255, 0.65);
+            --card-border: rgba(0, 0, 0, 0.12);
+            --text-main: #1e293b;
             --text-sub: #475569;
         }
 
-        body.hill-mode .space-container,
-        body.hill-mode .bg-glow-1,
-        body.hill-mode .bg-glow-2 { opacity: 0; }
-        body.hill-mode .hill-theme-container { opacity: 1; }
-        body.hill-mode header { background: rgba(255, 255, 255, 0.7); border-bottom-color: rgba(0,0,0,0.08); }
-        body.hill-mode .nav-logo { color: #0f172a; }
-        body.hill-mode .nav-links a { color: #475569; }
-        body.hill-mode .search-box { background: rgba(255, 255, 255, 0.85); border-color: rgba(14, 165, 233, 0.4); }
-        body.hill-mode .search-input { color: #0f172a; }
+        body.sadboy-mode .space-container,
+        body.sadboy-mode .bg-glow-1,
+        body.sadboy-mode .bg-glow-2 { opacity: 0; }
+        body.sadboy-mode .sadboy-theme-container { opacity: 1; }
+        body.sadboy-mode header { background: rgba(255, 255, 255, 0.65); border-bottom-color: rgba(0,0,0,0.1); }
+        body.sadboy-mode .nav-logo { color: #0f172a; }
+        body.sadboy-mode .nav-links a { color: #334155; }
+        body.sadboy-mode .search-box { background: rgba(255, 255, 255, 0.85); border-color: rgba(100, 116, 139, 0.4); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); }
+        body.sadboy-mode .search-input { color: #0f172a; }
 
-        /* ==================== HEADER & NAVIGATION ==================== */
+        /* ==================== HEADER & NAVBAR ==================== */
         header {
             position: sticky; top: 0; z-index: 100;
-            background: rgba(8, 11, 17, 0.85);
-            backdrop-filter: blur(16px);
+            background: rgba(8, 11, 17, 0.85); backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--card-border);
-            padding: 16px 32px;
-            display: flex; justify-content: space-between; align-items: center;
+            padding: 16px 32px; display: flex; justify-content: space-between; align-items: center;
             transition: all 0.5s ease;
         }
 
-        .nav-logo {
-            display: flex; align-items: center; gap: 12px;
-            font-weight: 800; font-size: 1.25rem; text-decoration: none; color: #fff;
-        }
-
-        .nav-logo-badge {
-            background: linear-gradient(135deg, #7928CA, #FF007A);
-            padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 900;
-            letter-spacing: 1px; box-shadow: 0 0 15px rgba(255, 0, 122, 0.4);
-        }
+        .nav-logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.25rem; text-decoration: none; color: #fff; }
+        .nav-logo-badge { background: linear-gradient(135deg, #7928CA, #FF007A); padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; box-shadow: 0 0 15px rgba(255, 0, 122, 0.4); }
 
         .nav-links { display: flex; gap: 18px; list-style: none; align-items: center; }
+        .nav-links a, .nav-btn { color: var(--text-sub); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; cursor: pointer; background: transparent; border: none; }
+        .nav-links a:hover, .nav-links a.active { color: #00f2fe; text-shadow: 0 0 10px rgba(0, 242, 254, 0.5); }
 
-        .nav-links a, .nav-btn {
-            color: var(--text-sub); text-decoration: none; font-weight: 600; font-size: 0.95rem;
-            transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;
-            cursor: pointer; background: transparent; border: none;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: #00f2fe; text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
-        }
-
-        /* NÚT AI CHAT SANG XIN MỊN VỚI HIỆU ỨNG GLOW RGB */
+        /* NÚT AI CHAT RGB NỔI BẬT */
         .ai-chat-btn {
-            position: relative;
             background: linear-gradient(135deg, #8a2be2, #00f2fe, #ff007a) !important;
-            background-size: 200% 200% !important;
-            animation: aiGlow 3s ease infinite !important;
-            color: #ffffff !important;
-            padding: 8px 18px !important;
-            border-radius: 30px !important;
-            font-weight: 800 !important;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.6), 0 0 30px rgba(138, 43, 226, 0.4);
+            background-size: 200% 200% !important; animation: aiGlow 3s ease infinite !important;
+            color: #ffffff !important; padding: 8px 18px !important; border-radius: 30px !important;
+            font-weight: 800 !important; box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.4) !important;
         }
-        .ai-chat-btn:hover {
-            transform: scale(1.08) translateY(-2px);
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.9), 0 0 40px rgba(255, 0, 122, 0.7);
-        }
-        @keyframes aiGlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        @keyframes aiGlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
         /* NÚT THAY ĐỔI GIAO DIỆN */
-        .theme-toggle-btn {
-            background: rgba(255, 255, 255, 0.08) !important;
-            border: 1px solid var(--card-border) !important;
-            padding: 8px 16px !important;
-            border-radius: 20px !important;
-            color: var(--text-main) !important;
-        }
-        .theme-toggle-btn:hover {
-            background: rgba(0, 242, 254, 0.15) !important;
-            border-color: #00f2fe !important;
-            color: #00f2fe !important;
-        }
+        .theme-toggle-btn { background: rgba(255, 255, 255, 0.08) !important; border: 1px solid var(--card-border) !important; padding: 8px 16px !important; border-radius: 20px !important; color: var(--text-main) !important; }
+        .theme-toggle-btn:hover { background: rgba(0, 242, 254, 0.15) !important; border-color: #00f2fe !important; color: #00f2fe !important; }
 
         /* ==================== HERO SECTION ==================== */
-        .hero {
-            position: relative; z-index: 1; text-align: center;
-            padding: 70px 20px 40px; max-width: 1100px; margin: 0 auto;
-        }
-
+        .hero { position: relative; z-index: 1; text-align: center; padding: 70px 20px 40px; max-width: 1100px; margin: 0 auto; }
         .main-title {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(3.2rem, 7.5vw, 6rem);
-            font-weight: 800; letter-spacing: 2px; line-height: 1.05; text-transform: uppercase;
+            font-family: 'Syne', sans-serif; font-size: clamp(3.2rem, 7.5vw, 6rem); font-weight: 800;
+            letter-spacing: 2px; line-height: 1.05; text-transform: uppercase;
             background: linear-gradient(135deg, #FF007A 0%, #7928CA 30%, #00DFD8 70%, #FFD700 100%);
-            background-size: 300% 300%;
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: vibrantGradient 6s ease infinite;
-            filter: drop-shadow(0 8px 30px rgba(121, 40, 202, 0.5));
-            margin-bottom: 20px;
+            background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: vibrantGradient 6s ease infinite; filter: drop-shadow(0 8px 30px rgba(121, 40, 202, 0.5)); margin-bottom: 20px;
         }
         @keyframes vibrantGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
         .subtitle { font-size: clamp(1.1rem, 2.5vw, 1.45rem); color: var(--text-sub); font-weight: 500; margin-bottom: 40px; }
-
         .gold-running-text {
-            font-weight: 900;
-            background: linear-gradient(90deg, #bf953f 0%, #fcf6ba 20%, #b38728 40%, #fbf5b7 60%, #aa771c 80%, #bf953f 100%);
+            font-weight: 900; background: linear-gradient(90deg, #bf953f 0%, #fcf6ba 20%, #b38728 40%, #fbf5b7 60%, #aa771c 80%, #bf953f 100%);
             background-size: 200% auto; color: transparent; -webkit-background-clip: text;
             animation: goldShimmer 2.2s linear infinite; display: inline-block; filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.6));
         }
@@ -258,30 +199,19 @@
 
         /* SEARCH BAR */
         .search-container { max-width: 680px; margin: 0 auto 35px; }
-        .search-box {
-            display: flex; align-items: center; background: rgba(18, 24, 38, 0.85);
-            border: 2px solid rgba(0, 242, 254, 0.25); border-radius: 50px; padding: 8px 12px 8px 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); transition: all 0.3s ease;
-        }
+        .search-box { display: flex; align-items: center; background: rgba(18, 24, 38, 0.85); border: 2px solid rgba(0, 242, 254, 0.25); border-radius: 50px; padding: 8px 12px 8px 24px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); transition: all 0.3s ease; }
         .search-input { width: 100%; background: transparent; border: none; outline: none; color: var(--text-main); font-size: 1.05rem; }
-        .search-btn {
-            background: linear-gradient(135deg, #00f2fe, #4facfe); border: none; color: #000;
-            font-weight: 800; padding: 12px 26px; border-radius: 40px; cursor: pointer;
-        }
+        .search-btn { background: linear-gradient(135deg, #00f2fe, #4facfe); border: none; color: #000; font-weight: 800; padding: 12px 26px; border-radius: 40px; cursor: pointer; }
 
         /* GRID CONTENT */
         .main-container { max-width: 1280px; margin: 0 auto; padding: 0 24px 80px; position: relative; z-index: 1; }
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 28px; }
-        .card {
-            background: var(--card-bg); border: 1px solid var(--card-border);
-            border-radius: 20px; overflow: hidden; backdrop-filter: blur(12px);
-            transition: all 0.4s ease; padding: 20px;
-        }
+        .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; overflow: hidden; backdrop-filter: blur(12px); transition: all 0.4s ease; padding: 22px; }
     </style>
 </head>
 <body>
 
-    <!-- THỂ LOẠI 1: BACKGROUND VŨ TRỤ & SAO BĂNG RƠI -->
+    <!-- THỂ LOẠI 1: BACKGROUND VŨ TRỤ BAN ĐẦU -->
     <div class="space-container">
         <div class="stars"></div>
         <div class="shooting-star"></div>
@@ -290,45 +220,49 @@
     <div class="bg-glow-1"></div>
     <div class="bg-glow-2"></div>
 
-    <!-- THỂ LOẠI 2: BACKGROUND ĐỒI NÚI XANH + BẦU TRỜI + ĐỨA TRẺ SUY NGHĨ + GIÓ SỐNG ĐỘNG -->
-    <div class="hill-theme-container" id="hillTheme">
-        <!-- Mây trôi -->
-        <div class="cloud cloud-1"></div>
-        <div class="cloud cloud-2"></div>
+    <!-- THỂ LOẠI 2: SADBOY ANIME MODE - BẦU TRỜI TRẮNG XÁM + CƠN MƯA + CHÀNG TRAI THẤT TÌNH NGHĨ NGHẦN DƯỚI GỐC CÂY -->
+    <div class="sadboy-theme-container" id="sadboyTheme">
+        <!-- Mây mù xám trắng u uất -->
+        <div class="sad-cloud sad-cloud-1"></div>
+        <div class="sad-cloud sad-cloud-2"></div>
 
-        <!-- Khung cảnh Đồi núi & Cây đung đưa -->
-        <svg class="landscape-svg" viewBox="0 0 1440 600" preserveAspectRatio="none">
-            <!-- Đồi núi phía xa -->
-            <path fill="#a3e635" opacity="0.5" d="M0,320 C320,180 420,280 800,220 C1100,170 1200,290 1440,240 L1440,600 L0,600 Z"></path>
-            <!-- Đồi núi gần -->
-            <path fill="#65a30d" opacity="0.8" d="M0,380 C350,260 700,420 1100,310 C1300,260 1400,330 1440,350 L1440,600 L0,600 Z"></path>
-            <!-- Đồi cỏ chính phía trước -->
-            <path fill="#4d7c0f" d="M-100,450 C300,320 800,500 1540,380 L1540,600 L-100,600 Z"></path>
+        <!-- Mưa trút xuống -->
+        <div class="rain-container" id="rainContainer"></div>
 
-            <!-- CÂY CỔ THỤ CÓ LÁ ĐUNG ĐƯA THEO GIÓ -->
-            <g transform="translate(1050, 180)">
-                <!-- Thân cây -->
-                <path d="M70,260 Q65,180 30,120 Q20,100 25,80 Q35,110 55,130 Q90,160 100,260 Z" fill="#422006"/>
-                <!-- Tán lá rung rinh trong gió -->
-                <g class="tree-leaves">
-                    <circle cx="20" cy="80" r="65" fill="#15803d" opacity="0.9"/>
-                    <circle cx="70" cy="50" r="75" fill="#166534"/>
-                    <circle cx="110" cy="90" r="60" fill="#22c55e" opacity="0.8"/>
-                    <circle cx="50" cy="110" r="55" fill="#15803d"/>
+        <!-- Phong cảnh SVG Sadboy -->
+        <svg class="sad-landscape-svg" viewBox="0 0 1440 600" preserveAspectRatio="none">
+            <!-- Đồi núi phía xa màu xám tím mờ -->
+            <path fill="#525b70" opacity="0.6" d="M0,320 C300,220 500,290 850,210 C1150,150 1300,270 1440,230 L1440,600 L0,600 Z"></path>
+            <!-- Đồi núi trung gian -->
+            <path fill="#3a4150" opacity="0.8" d="M0,370 C350,280 650,400 1050,300 C1250,250 1380,330 1440,340 L1440,600 L0,600 Z"></path>
+            <!-- Đồi tối phía trước -->
+            <path fill="#1e232d" d="M-100,440 C350,330 750,480 1540,370 L1540,600 L-100,600 Z"></path>
+
+            <!-- CÂY KHÔ ĐỘC HÀNH VÀ CHÀNG TRAI ĐEN THUI NGỒI GỤC ĐẦU -->
+            <g transform="translate(1020, 150)">
+                <!-- Thân & Cành cây sầu -->
+                <g class="sad-tree">
+                    <path d="M80,290 Q70,190 35,130 Q15,100 25,70 Q40,40 20,10 M25,70 Q-10,40 -40,50 M35,130 Q80,90 110,70 M75,180 Q130,150 150,130" stroke="#0f1217" stroke-width="12" stroke-linecap="round" fill="none"/>
+                    <!-- Tán lá thưa thớt u buồn -->
+                    <circle cx="20" cy="10" r="25" fill="#181d26" opacity="0.7"/>
+                    <circle cx="-40" cy="50" r="30" fill="#181d26" opacity="0.6"/>
+                    <circle cx="110" cy="70" r="35" fill="#181d26" opacity="0.8"/>
                 </g>
-                
-                <!-- ĐỨA TRẺ NGỒI DƯỚI GỐC CÂY SUY NGHĨ -->
-                <g class="thinking-kid" transform="translate(15, 205)">
-                    <!-- Bóng đứa trẻ -->
-                    <ellipse cx="20" cy="42" rx="18" ry="4" fill="#1a2e05" opacity="0.4"/>
-                    <!-- Thân người ngồi co gối suy tư -->
-                    <path d="M12,22 C12,15 18,12 22,12 C26,12 30,18 28,26 C26,32 20,38 10,40 C15,35 15,28 12,22 Z" fill="#1e293b"/>
-                    <!-- Đầu đứa trẻ đang ngửa nhẹ suy nghĩ -->
-                    <circle cx="23" cy="8" r="7" fill="#1e293b"/>
-                    <!-- Chân co lên -->
-                    <path d="M10,40 C20,38 25,30 25,30" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
-                    <!-- Tay chống cằm -->
-                    <path d="M18,25 C22,22 23,14 23,14" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
+
+                <!-- CHÀNG TRAI ĐEN THUI (SILHOUETTE) NGỒI GỤC ĐẦU THẤT TÌNH DƯỚI GỐC CÂY -->
+                <g class="sad-boy" transform="translate(-10, 235)">
+                    <!-- Bóng ngồi trên mặt đất -->
+                    <ellipse cx="25" cy="50" rx="22" ry="5" fill="#080a0d" opacity="0.8"/>
+                    
+                    <!-- Dáng ngồi bó gối co ro gục đầu -->
+                    <!-- Lưng cong buồn -->
+                    <path d="M10,48 C10,30 18,22 28,22 C38,22 42,32 40,48 Z" fill="#0b0e14"/>
+                    <!-- Đầu gục xuống cằm chạm gối -->
+                    <circle cx="32" cy="18" r="9" fill="#0b0e14"/>
+                    <!-- Tay ôm lấy đầu gối -->
+                    <path d="M18,35 C28,30 38,36 36,46" stroke="#0b0e14" stroke-width="5" stroke-linecap="round" fill="none"/>
+                    <!-- Tóc anime rũ xuống -->
+                    <path d="M26,12 Q30,16 34,13 Q35,18 38,15" stroke="#0b0e14" stroke-width="3" fill="none"/>
                 </g>
             </g>
         </svg>
@@ -343,7 +277,7 @@
         <ul class="nav-links">
             <li><a href="#" class="active"><i class="fa-solid fa-house"></i> Trang Chủ</a></li>
             
-            <!-- NÚT AI CHAT NỔI BẬT RGB/GLOW -->
+            <!-- NÚT AI CHAT RGB NỔI BẬT -->
             <li>
                 <a href="#aichat" class="ai-chat-btn">
                     <i class="fa-solid fa-robot"></i> AI CHAT
@@ -353,7 +287,7 @@
             <!-- NÚT ĐỔI GIAO DIỆN -->
             <li>
                 <button class="nav-btn theme-toggle-btn" onclick="toggleTheme()">
-                    <i class="fa-solid fa-wand-magic-sparkles" style="color: #00f2fe;"></i> Giao diện
+                    <i class="fa-solid fa-cloud-rain" style="color: #00f2fe;"></i> Giao diện
                 </button>
             </li>
 
@@ -391,16 +325,31 @@
                 <p style="margin-top: 10px; color: var(--text-sub);">Hỏi đáp bài tập, giải code tức thì với AI thông minh tích hợp sẵn.</p>
             </div>
             <div class="card">
-                <h3><i class="fa-solid fa-leaf" style="color: #22c55e;"></i> Giao Diện Phong Cảnh</h3>
-                <p style="margin-top: 10px; color: var(--text-sub);">Chuyển đổi linh hoạt giữa giao diện Vũ Trụ và Đồi Núi xanh chill.</p>
+                <h3><i class="fa-solid fa-cloud-moon" style="color: #a855f7;"></i> Mood Anime Sadboy</h3>
+                <p style="margin-top: 10px; color: var(--text-sub);">Chuyển đổi giao diện cơn mưa sầu u buồn chill đượm chất Anime.</p>
             </div>
         </div>
     </main>
 
-    <!-- JavaScript Chuyển Đổi Giao Diện -->
+    <!-- JavaScript Tạo Mưa & Đổi Giao Diện -->
     <script>
+        // Tạo hạt mưa ngẫu nhiên
+        const rainContainer = document.getElementById('rainContainer');
+        const dropCount = 60;
+
+        for (let i = 0; i < dropCount; i++) {
+            const drop = document.createElement('div');
+            drop.classList.add('drop');
+            drop.style.left = `${Math.random() * 100}%`;
+            drop.style.animationDuration = `${0.5 + Math.random() * 0.5}s`;
+            drop.style.animationDelay = `${Math.random() * 2}s`;
+            drop.style.height = `${40 + Math.random() * 40}px`;
+            rainContainer.appendChild(drop);
+        }
+
+        // Toggle giao diện Sadboy
         function toggleTheme() {
-            document.body.classList.toggle('hill-mode');
+            document.body.classList.toggle('sadboy-mode');
         }
     </script>
 </body>
