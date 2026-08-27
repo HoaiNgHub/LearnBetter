@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HNG ACADEMY - Storm Sadboy Cinematic Mode</title>
+    <title>HNG ACADEMY - Ultra VIP Storm Sadboy Edition</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,7 +67,7 @@
         .bg-glow-1 { top: -100px; left: 50%; transform: translateX(-50%); width: 800px; height: 400px; background: radial-gradient(circle, rgba(121, 40, 202, 0.35) 0%, rgba(0, 242, 254, 0.15) 50%, transparent 80%); }
         .bg-glow-2 { bottom: -150px; right: -100px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255, 215, 0, 0.12) 0%, rgba(255, 0, 122, 0.1) 50%, transparent 80%); }
 
-        /* ==================== SADBOY STORM THEME (BẢO TỐ U BUỒN COMPLEX) ==================== */
+        /* ==================== SADBOY STORM THEME ==================== */
         .storm-theme-container {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none; z-index: 0; opacity: 0;
@@ -76,21 +76,18 @@
             overflow: hidden;
         }
 
-        /* Canvas hiệu ứng mưa bão & sấm chớp */
         #stormCanvas {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 2; pointer-events: none;
         }
 
-        /* Flash giật sét chớp toàn màn hình */
         .lightning-flash {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.85); opacity: 0;
+            background: rgba(255, 255, 255, 0.9); opacity: 0;
             z-index: 1; pointer-events: none;
             transition: opacity 0.05s ease-out;
         }
 
-        /* Mây Bão Cuồn Cuộn */
         .storm-cloud {
             position: absolute; background: radial-gradient(circle, rgba(55, 65, 81, 0.8) 0%, rgba(17, 24, 39, 0.95) 80%);
             border-radius: 50%; filter: blur(25px); z-index: 1;
@@ -100,12 +97,10 @@
         .cloud-b { top: -50px; right: -150px; width: 900px; height: 320px; animation-duration: 25s; }
         @keyframes cloudChurn { 0% { transform: scale(1) translateX(0); } 100% { transform: scale(1.1) translateX(60px); } }
 
-        /* Khung Cảnh SVG Sadboy Bão Tố */
         .storm-svg {
             position: absolute; bottom: 0; width: 100%; height: 70vh; z-index: 3;
         }
 
-        /* Cây Khô Đung Đưa Trong Cơn Bão */
         .storm-tree {
             transform-origin: bottom center;
             animation: violentWind 2.5s ease-in-out infinite alternate;
@@ -116,7 +111,6 @@
             100% { transform: rotate(-8deg) skewX(-7deg); }
         }
 
-        /* Chàng trai gục đầu chịu trận mưa bão */
         .sad-lonely-boy {
             transform-origin: bottom center;
             animation: boyShiver 0.15s ease-in-out infinite alternate;
@@ -126,7 +120,6 @@
             100% { transform: translateY(0.8px) translateX(-0.5px); }
         }
 
-        /* KHI BẬT THEME BẢO TỐ SADBOY */
         body.sadboy-mode {
             --bg-color: #0b0f17;
             --card-bg: rgba(15, 23, 42, 0.75);
@@ -158,7 +151,6 @@
         .nav-links a, .nav-btn { color: var(--text-sub); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; cursor: pointer; background: transparent; border: none; }
         .nav-links a:hover, .nav-links a.active { color: #00f2fe; text-shadow: 0 0 10px rgba(0, 242, 254, 0.5); }
 
-        /* NÚT AI CHAT RGB NỔI BẬT */
         .ai-chat-btn {
             background: linear-gradient(135deg, #8a2be2, #00f2fe, #ff007a) !important;
             background-size: 200% 200% !important; animation: aiGlow 3s ease infinite !important;
@@ -168,7 +160,6 @@
         }
         @keyframes aiGlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        /* NÚT THAY ĐỔI GIAO DIỆN BÃO TỐ */
         .theme-toggle-btn { background: rgba(255, 255, 255, 0.08) !important; border: 1px solid var(--card-border) !important; padding: 8px 16px !important; border-radius: 20px !important; color: var(--text-main) !important; }
         .theme-toggle-btn:hover { background: rgba(0, 242, 254, 0.15) !important; border-color: #00f2fe !important; color: #00f2fe !important; }
 
@@ -191,16 +182,47 @@
         }
         @keyframes goldShimmer { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
 
-        /* SEARCH BAR */
+        /* SEARCH BAR LIVE FILTER */
         .search-container { max-width: 680px; margin: 0 auto 35px; }
         .search-box { display: flex; align-items: center; background: rgba(18, 24, 38, 0.85); border: 2px solid rgba(0, 242, 254, 0.25); border-radius: 50px; padding: 8px 12px 8px 24px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); transition: all 0.3s ease; }
         .search-input { width: 100%; background: transparent; border: none; outline: none; color: var(--text-main); font-size: 1.05rem; }
-        .search-btn { background: linear-gradient(135deg, #00f2fe, #4facfe); border: none; color: #000; font-weight: 800; padding: 12px 26px; border-radius: 40px; cursor: pointer; }
+        .search-btn { background: linear-gradient(135deg, #00f2fe, #4facfe); border: none; color: #000; font-weight: 800; padding: 12px 26px; border-radius: 40px; cursor: pointer; transition: 0.3s; }
+        .search-btn:hover { transform: scale(1.05); }
 
-        /* GRID CONTENT */
+        /* GRID CONTENT WITH 3D TILT EFFECT */
         .main-container { max-width: 1280px; margin: 0 auto; padding: 0 24px 80px; position: relative; z-index: 10; }
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 28px; }
-        .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; overflow: hidden; backdrop-filter: blur(12px); transition: all 0.4s ease; padding: 22px; }
+        .card { 
+            background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; overflow: hidden; backdrop-filter: blur(12px); 
+            transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease; padding: 22px; cursor: pointer;
+        }
+        .card:hover {
+            border-color: #00f2fe; box-shadow: 0 10px 30px rgba(0, 242, 254, 0.2);
+        }
+
+        /* AI CHAT MODAL INTERFACE */
+        .ai-modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(3, 7, 18, 0.7); backdrop-filter: blur(10px);
+            z-index: 999; display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+        }
+        .ai-modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .ai-modal {
+            width: 90%; max-width: 550px; height: 600px; background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 24px; display: flex; flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 242, 254, 0.2); overflow: hidden;
+            transform: translateY(30px); transition: transform 0.4s ease;
+        }
+        .ai-modal-overlay.active .ai-modal { transform: translateY(0); }
+        .ai-header { padding: 18px 24px; background: rgba(30, 41, 59, 0.8); border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; }
+        .ai-chat-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; }
+        .chat-msg { max-width: 80%; padding: 12px 16px; border-radius: 16px; font-size: 0.95rem; line-height: 1.4; }
+        .chat-msg.bot { background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(0, 242, 254, 0.2); align-self: flex-start; color: #f8fafc; }
+        .chat-msg.user { background: linear-gradient(135deg, #7928CA, #FF007A); align-self: flex-end; color: #fff; }
+        .ai-input-box { padding: 16px; border-top: 1px solid var(--card-border); display: flex; gap: 10px; background: rgba(15, 23, 42, 0.9); }
+        .ai-input-box input { flex: 1; background: rgba(30, 41, 59, 0.8); border: 1px solid var(--card-border); border-radius: 30px; padding: 10px 18px; color: #fff; outline: none; }
+        .ai-input-box button { background: linear-gradient(135deg, #00f2fe, #4facfe); border: none; width: 42px; height: 42px; border-radius: 50%; color: #000; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: center; align-items: center; }
     </style>
 </head>
 <body class="sadboy-mode">
@@ -214,44 +236,32 @@
     <div class="bg-glow-1"></div>
     <div class="bg-glow-2"></div>
 
-    <!-- THEME 2: SADBOY ANIME BẢO TỐ CINEMATIC (SẤM CHỚP + MƯA BẢO NGHIÊNG + CHÀNG TRAI SẦU) -->
+    <!-- THEME 2: SADBOY ANIME BẢO TỐ CINEMATIC -->
     <div class="storm-theme-container">
         <div class="lightning-flash" id="lightningFlash"></div>
         <div class="storm-cloud cloud-a"></div>
         <div class="storm-cloud cloud-b"></div>
         
-        <!-- Canvas vẽ mưa bão & sét chuyên nghiệp -->
         <canvas id="stormCanvas"></canvas>
 
-        <!-- SVG Đồi Núi & Cây Bão Tố -->
         <svg class="storm-svg" viewBox="0 0 1440 600" preserveAspectRatio="none">
-            <!-- Đồi núi xa u tối -->
             <path fill="#111827" opacity="0.7" d="M0,280 C300,180 550,260 880,190 C1180,130 1320,240 1440,200 L1440,600 L0,600 Z"></path>
-            <!-- Đồi núi gần -->
             <path fill="#0f172a" opacity="0.9" d="M0,350 C350,250 680,380 1080,280 C1280,230 1390,310 1440,320 L1440,600 L0,600 Z"></path>
-            <!-- Đồi cỏ chính u buồn -->
             <path fill="#030712" d="M-100,430 C350,320 750,470 1540,360 L1540,600 L-100,600 Z"></path>
 
-            <!-- CÂY KHÔ NGHIÊNG NGẢ TRONG BẢO & CHÀNG TRAI SADBOY -->
             <g transform="translate(1040, 130)">
-                <!-- Thân cây khô bão giằng xé -->
                 <g class="storm-tree">
                     <path d="M90,310 Q75,200 30,130 Q10,90 20,50 Q35,20 10,-20 M20,50 Q-20,20 -50,30 M30,130 Q90,90 120,60 M80,190 Q140,150 160,120" stroke="#030712" stroke-width="15" stroke-linecap="round" fill="none"/>
-                    <!-- Tán lá rách nát bão cuốn -->
                     <circle cx="10" cy="-20" r="20" fill="#0f172a" opacity="0.8"/>
                     <circle cx="-50" cy="30" r="25" fill="#0f172a" opacity="0.7"/>
                     <circle cx="120" cy="60" r="30" fill="#0f172a" opacity="0.9"/>
                 </g>
 
-                <!-- CHÀNG TRAI SADBOY NGỒI GỤC ĐẦU CÔ ĐƠN CHỊU BẢO -->
                 <g class="sad-lonely-boy" transform="translate(-20, 260)">
                     <ellipse cx="25" cy="52" rx="26" ry="6" fill="#000000" opacity="0.9"/>
-                    <!-- Dáng người gục đầu chịu mưa -->
                     <path d="M8,50 C8,28 18,18 30,18 C42,18 46,30 44,50 Z" fill="#020617"/>
                     <circle cx="34" cy="14" r="10" fill="#020617"/>
-                    <!-- Tay ôm co ro -->
                     <path d="M16,36 C28,30 38,38 36,48" stroke="#020617" stroke-width="6" stroke-linecap="round" fill="none"/>
-                    <!-- Tóc anime rũ bết do mưa -->
                     <path d="M26,8 Q30,14 36,10 Q37,16 42,12" stroke="#020617" stroke-width="3" fill="none"/>
                 </g>
             </g>
@@ -266,21 +276,16 @@
         </a>
         <ul class="nav-links">
             <li><a href="#" class="active"><i class="fa-solid fa-house"></i> Trang Chủ</a></li>
-            
-            <!-- NÚT AI CHAT RGB -->
             <li>
-                <a href="#aichat" class="ai-chat-btn">
-                    <i class="fa-solid fa-robot"></i> AI CHAT
-                </a>
+                <button class="ai-chat-btn" onclick="openAiChat()">
+                    <i class="fa-solid fa-robot"></i> AI CHAT LIVE
+                </button>
             </li>
-
-            <!-- NÚT THAY ĐỔI GIAO DIỆN -->
             <li>
                 <button class="nav-btn theme-toggle-btn" onclick="toggleTheme()">
                     <i class="fa-solid fa-bolt" style="color: #38bdf8;"></i> Giao diện
                 </button>
             </li>
-
             <li><a href="#about"><i class="fa-solid fa-shield-halved"></i> Bản Quyền</a></li>
         </ul>
     </header>
@@ -293,11 +298,11 @@
             <span class="gold-running-text">HNG/HoàiNg</span>
         </p>
 
-        <!-- THANH TÌM KIẾM -->
+        <!-- THANH TÌM KIẾM TỰ ĐỘNG FILTER -->
         <div class="search-container">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass" style="color: #38bdf8; margin-right: 12px;"></i>
-                <input type="text" class="search-input" placeholder="Tìm kiếm nội dung học tập, mã nguồn...">
+                <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm khoá học, thuật toán, mã nguồn..." onkeyup="filterCards()">
                 <button class="search-btn">Tìm kiếm</button>
             </div>
         </div>
@@ -305,23 +310,46 @@
 
     <!-- Content Grid -->
     <main class="main-container">
-        <div class="cards-grid">
-            <div class="card">
+        <div class="cards-grid" id="cardsGrid">
+            <div class="card" data-title="kho lap trinh toi uu">
                 <h3><i class="fa-solid fa-code" style="color: #38bdf8;"></i> Kho Lập Trình Tối Ưu</h3>
-                <p style="margin-top: 10px; color: var(--text-sub);">Nơi chia sẻ kiến thức và giải thuật tối ưu bởi HNG/HoàiNg.</p>
+                <p style="margin-top: 10px; color: var(--text-sub);">Nơi chia sẻ kiến thức và giải thuật tối ưu chuẩn Olympic bởi HNG/HoàiNg.</p>
             </div>
-            <div class="card">
-                <h3><i class="fa-solid fa-brain" style="color: #ff007a;"></i> Trợ Lý AI CHAT</h3>
-                <p style="margin-top: 10px; color: var(--text-sub);">Hỏi đáp bài tập, giải code tức thì với AI thông minh tích hợp sẵn.</p>
+            <div class="card" data-title="tro ly ai chat tro ly thong minh">
+                <h3><i class="fa-solid fa-brain" style="color: #ff007a;"></i> Trợ Lý AI CHAT LIVE</h3>
+                <p style="margin-top: 10px; color: var(--text-sub);">Hỏi đáp bài tập, sửa lỗi code tức thì với AI thông minh tích hợp sẵn.</p>
             </div>
-            <div class="card">
-                <h3><i class="fa-solid fa-cloud-showers-heavy" style="color: #38bdf8;"></i> Sadboy Storm Cinematic</h3>
-                <p style="margin-top: 10px; color: var(--text-sub);">Giao diện bão tố u buồn phức tạp đỉnh cao với Canvas Rain Engine & Lightning flash.</p>
+            <div class="card" data-title="sadboy storm cinematic bao to u buon">
+                <h3><i class="fa-solid fa-cloud-showers-heavy" style="color: #38bdf8;"></i> Sadboy Storm Engine</h3>
+                <p style="margin-top: 10px; color: var(--text-sub);">Giao diện bão tố u buồn phức tạp với hiệu ứng tia sét đánh chẻ đôi độc quyền.</p>
+            </div>
+            <div class="card" data-title="am thanh bao to web audio api">
+                <h3><i class="fa-solid fa-volume-high" style="color: #00dfd8;"></i> Âm Thanh Bão Tố Spatial</h3>
+                <p style="margin-top: 10px; color: var(--text-sub);">Âm thanh mưa bão và tiếng sấm rền sống động được lập trình trực tiếp.</p>
             </div>
         </div>
     </main>
 
-    <!-- CANVAS ANIMATION ENGINE: MƯA BẢO NGHIÊNG TẠT + SẤM CHỚP TỰ ĐỘNG -->
+    <!-- MODAL AI CHAT TRỰC TIẾP -->
+    <div class="ai-modal-overlay" id="aiModal">
+        <div class="ai-modal">
+            <div class="ai-header">
+                <span style="font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-robot" style="color: #00f2fe;"></i> HNG AI Assistant
+                </span>
+                <i class="fa-solid fa-xmark" style="cursor: pointer; font-size: 1.2rem;" onclick="closeAiChat()"></i>
+            </div>
+            <div class="ai-chat-body" id="chatBody">
+                <div class="chat-msg bot">Chào bạn! Tôi là Trợ lý AI HNG ACADEMY. Bạn cần giải bài tập hay hỗ trợ gì hôm nay?</div>
+            </div>
+            <div class="ai-input-box">
+                <input type="text" id="aiInput" placeholder="Nhập câu hỏi cho AI..." onkeydown="if(event.key==='Enter') sendAiMessage()">
+                <button onclick="sendAiMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CANVAS ENGINE VIP: TIA SÉT CHẺ ĐÔI & MƯA TẠT & ÂM THANH BẢO TỐ -->
     <script>
         const canvas = document.getElementById('stormCanvas');
         const ctx = canvas.getContext('2d');
@@ -335,28 +363,53 @@
             height = canvas.height = window.innerHeight;
         });
 
-        // Cấu hình hạt mưa bão
+        /* --- MƯA BẢO NGHIÊNG TẠT --- */
         const rainDrops = [];
-        const dropCount = 220; // Hơn 200 hạt mưa tạt dồn dập
+        const dropCount = 260;
 
         for (let i = 0; i < dropCount; i++) {
             rainDrops.push({
                 x: Math.random() * width * 1.5 - width * 0.2,
                 y: Math.random() * height,
                 length: Math.random() * 35 + 20,
-                speed: Math.random() * 18 + 14,
+                speed: Math.random() * 18 + 15,
                 opacity: Math.random() * 0.4 + 0.2,
-                wind: Math.random() * 4 + 6 // Nghiêng theo gió bão
+                wind: Math.random() * 4 + 6
             });
         }
 
-        // Vẽ mưa bão dồn dập
-        function drawRain() {
+        /* --- MÔ PHỎNG VẼ TIA SẾT ĐÁNH CHẺ ĐÔI (PROCEDURAL LIGHTNING) --- */
+        let activeLightning = null;
+
+        function createLightningBolt(startX, startY, length, angle, branchCapacity) {
+            let bolt = [];
+            let currX = startX;
+            let currY = startY;
+
+            for (let i = 0; i < length; i++) {
+                let step = Math.random() * 12 + 8;
+                let nextX = currX + Math.sin(angle) * step + (Math.random() - 0.5) * 12;
+                let nextY = currY + Math.cos(angle) * step;
+
+                bolt.push({ x1: currX, y1: currY, x2: nextX, y2: nextY });
+
+                if (branchCapacity > 0 && Math.random() < 0.15) {
+                    bolt = bolt.concat(createLightningBolt(nextX, nextY, Math.floor(length * 0.5), angle + (Math.random() - 0.5) * 0.8, branchCapacity - 1));
+                }
+
+                currX = nextX;
+                currY = nextY;
+                if (currY > height * 0.8) break;
+            }
+            return bolt;
+        }
+
+        function drawRainAndLightning() {
             ctx.clearRect(0, 0, width, height);
 
+            // Vẽ hạt mưa
             for (let i = 0; i < dropCount; i++) {
                 const d = rainDrops[i];
-
                 ctx.beginPath();
                 ctx.moveTo(d.x, d.y);
                 ctx.lineTo(d.x - d.wind * 2, d.y + d.length);
@@ -372,36 +425,164 @@
                     d.x = Math.random() * width * 1.5 - width * 0.2;
                 }
             }
-            requestAnimationFrame(drawRain);
+
+            // Vẽ tia sét chẻ đôi điện áp
+            if (activeLightning) {
+                ctx.shadowColor = '#00f2fe';
+                ctx.shadowBlur = 20;
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2.5;
+
+                ctx.beginPath();
+                for (let seg of activeLightning) {
+                    ctx.moveTo(seg.x1, seg.y1);
+                    ctx.lineTo(seg.x2, seg.y2);
+                }
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+            }
+
+            requestAnimationFrame(drawRainAndLightning);
         }
 
-        drawRain();
+        drawRainAndLightning();
 
-        // Tự động kích hoạt Sấm Chớp Giật Điện ngẫu nhiên
+        /* --- SẤM CHỚP & TẠO ÂM THANH MƯA (WEB AUDIO API) --- */
+        let audioCtx = null;
+
+        function playThunderSound() {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            // Web Audio Synth Tiếng Sấm Rền
+            let bufferSize = audioCtx.sampleRate * 1.5;
+            let buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            let output = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                output[i] = Math.random() * 2 - 1;
+            }
+
+            let whiteNoise = audioCtx.createBufferSource();
+            whiteNoise.buffer = buffer;
+
+            let filter = audioCtx.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(120, audioCtx.currentTime);
+            filter.frequency.exponentialRampToValueAtTime(30, audioCtx.currentTime + 1.2);
+
+            let gain = audioCtx.createGain();
+            gain.gain.setValueAtTime(0.8, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1.4);
+
+            whiteNoise.connect(filter);
+            filter.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            whiteNoise.start();
+        }
+
         function triggerLightning() {
             if (document.body.classList.contains('sadboy-mode')) {
-                // Tỷ lệ giật sét
-                if (Math.random() < 0.3) {
-                    flashElem.style.opacity = '0.7';
-                    setTimeout(() => { flashElem.style.opacity = '0'; }, 60);
+                if (Math.random() < 0.35) {
+                    flashElem.style.opacity = '0.95';
+                    
+                    // Tạo tia sét từ trời đánh xuống
+                    let startX = Math.random() * width * 0.8 + width * 0.1;
+                    activeLightning = createLightningBolt(startX, 0, 35, 0.1, 2);
+
+                    playThunderSound();
+
+                    setTimeout(() => { 
+                        flashElem.style.opacity = '0';
+                        activeLightning = null;
+                    }, 80);
+
                     setTimeout(() => {
-                        if (Math.random() > 0.5) {
-                            flashElem.style.opacity = '0.9';
-                            setTimeout(() => { flashElem.style.opacity = '0'; }, 40);
+                        if (Math.random() > 0.4) {
+                            flashElem.style.opacity = '0.7';
+                            setTimeout(() => { flashElem.style.opacity = '0'; }, 50);
                         }
-                    }, 100);
+                    }, 120);
                 }
             }
-            // Hẹn giờ chớp giật tiếp theo ngẫu nhiên từ 3 - 7 giây
             setTimeout(triggerLightning, Math.random() * 4000 + 3000);
         }
 
         triggerLightning();
 
-        // Toggle giao diện
         function toggleTheme() {
             document.body.classList.toggle('sadboy-mode');
         }
+
+        /* --- LIVE SEARCH FILTER CARD --- */
+        function filterCards() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.card');
+
+            cards.forEach(card => {
+                let title = card.getAttribute('data-title');
+                if (title.includes(input)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        /* --- INTERACTIVE AI CHAT MODAL --- */
+        function openAiChat() {
+            document.getElementById('aiModal').classList.add('active');
+        }
+        function closeAiChat() {
+            document.getElementById('aiModal').classList.remove('active');
+        }
+
+        function sendAiMessage() {
+            let input = document.getElementById('aiInput');
+            let chatBody = document.getElementById('chatBody');
+            let text = input.value.trim();
+
+            if (!text) return;
+
+            // Tin nhắn user
+            let userMsg = document.createElement('div');
+            userMsg.className = 'chat-msg user';
+            userMsg.innerText = text;
+            chatBody.appendChild(userMsg);
+
+            input.value = '';
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            // Phản hồi giả lập thông minh từ AI HNG
+            setTimeout(() => {
+                let botMsg = document.createElement('div');
+                botMsg.className = 'chat-msg bot';
+                
+                if (text.toLowerCase().includes('chào') || text.toLowerCase().includes('hi')) {
+                    botMsg.innerText = "Chào bạn! Tôi có thể giúp gì cho dự án lập trình của bạn hôm nay?";
+                } else if (text.toLowerCase().includes('code') || text.toLowerCase().includes('học')) {
+                    botMsg.innerText = "HNG ACADEMY cung cấp các cấu trúc dữ liệu và giải thuật tối ưu nhất. Bạn có thể tra cứu ngay trên thanh tìm kiếm!";
+                } else {
+                    botMsg.innerText = "Yêu cầu của bạn đã được tiếp nhận. AI đang phân tích dữ liệu và tối ưu cho hệ thống HNG ACADEMY...";
+                }
+
+                chatBody.appendChild(botMsg);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 800);
+        }
+
+        /* --- HIỆU ỨNG CARD 3D TILT KHI DI CHUỘT --- */
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                let rect = card.getBoundingClientRect();
+                let x = e.clientX - rect.left - rect.width / 2;
+                let y = e.clientY - rect.top - rect.height / 2;
+                card.style.transform = `perspective(1000px) rotateX(${-y / 20}deg) rotateY(${x / 20}deg) translateY(-5px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+            });
+        });
     </script>
 </body>
 </html>
