@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HNG ACADEMY - Masterpiece Edition</title>
+    <title>HNG ACADEMY - Ultra Storm Edition</title>
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
         :root {
-            --bg-color: #030712;
+            --bg-color: #020617;
             --card-bg: rgba(15, 23, 42, 0.75);
             --card-border: rgba(56, 189, 248, 0.2);
             --text-main: #f8fafc;
@@ -23,11 +23,28 @@
 
         body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; overflow-x: hidden; position: relative; }
 
-        /* Background Canvas & Storm Theme */
-        .storm-theme-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 0; background: linear-gradient(to bottom, #0b0f19 0%, #111827 50%, #030712 100%); }
+        /* ULTRA STORM THEME CONTAINER */
+        .storm-theme-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 0; background: #020617; overflow: hidden; }
+        
+        /* Dynamic Clouds Backdrop */
+        .cloud-layer {
+            position: absolute; top: -20%; left: -20%; width: 140%; height: 80%;
+            background: radial-gradient(circle at 50% 20%, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 50%, rgba(2, 6, 23, 1) 100%);
+            filter: blur(50px);
+            animation: cloudFloat 20s ease-in-out infinite alternate;
+        }
+        @keyframes cloudFloat {
+            0% { transform: translateX(-30px) translateY(0); }
+            100% { transform: translateX(30px) translateY(20px); }
+        }
+
         #stormCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; }
-        .lightning-flash { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.95); opacity: 0; z-index: 1; transition: opacity 0.05s ease-out; }
-        .storm-svg { position: absolute; bottom: 0; width: 100%; height: 65vh; z-index: 3; }
+        
+        /* Lightning Flash Screen & Ground Lighting */
+        .lightning-flash { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(224, 242, 254, 0.95); opacity: 0; z-index: 1; transition: opacity 0.05s ease-out; mixing-mode: overlay; }
+        .ground-reflection { position: absolute; bottom: 0; left: 0; width: 100%; height: 35vh; background: linear-gradient(to top, rgba(0, 242, 254, 0.15), transparent); opacity: 0; z-index: 2; transition: opacity 0.08s ease-out; }
+
+        .storm-svg { position: absolute; bottom: 0; width: 100%; height: 55vh; z-index: 3; }
 
         /* Navigation Bar */
         header { position: sticky; top: 0; z-index: 100; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
@@ -44,7 +61,7 @@
         
         .typewriter-box { font-size: 1.3rem; color: var(--text-sub); font-weight: 600; margin-bottom: 35px; min-height: 45px; }
         
-        /* Hiệu ứng Vàng Kim Gold Phát Sáng Chạy Chạy */
+        /* Gold Text Shimmer Effect */
         .gold-text {
             font-weight: 800;
             background: linear-gradient(90deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #bf953f 100%);
@@ -95,14 +112,16 @@
 </head>
 <body>
 
-    <!-- Storm Theme Container -->
+    <!-- Ultra Storm Theme Container -->
     <div class="storm-theme-container">
+        <div class="cloud-layer"></div>
         <div class="lightning-flash" id="lightningFlash"></div>
+        <div class="ground-reflection" id="groundReflection"></div>
         <canvas id="stormCanvas"></canvas>
 
         <svg class="storm-svg" viewBox="0 0 1440 600" preserveAspectRatio="none">
             <path fill="#0f172a" opacity="0.8" d="M0,320 C350,220 680,350 1080,260 C1280,210 1390,290 1440,300 L1440,600 L0,600 Z"></path>
-            <path fill="#030712" d="M-100,400 C350,290 750,440 1540,330 L1540,600 L-100,600 Z"></path>
+            <path fill="#020617" d="M-100,400 C350,290 750,440 1540,330 L1540,600 L-100,600 Z"></path>
         </svg>
     </div>
 
@@ -194,7 +213,7 @@
 
     <!-- JavaScript Master Engine -->
     <script>
-        /* TYPEWRITER EFFECT VỚI CÁC CHỮ MỚI PHỦ GOLD */
+        /* TYPEWRITER EFFECT VỚI CHỮ GOLD */
         const textArr = [
             "HNG/HoàiNg", 
             "Thanh Hoài", 
@@ -217,7 +236,7 @@
             let typeSpeed = isDeleting ? 40 : 80;
 
             if (!isDeleting && charIdx === currentText.length) {
-                typeSpeed = 2200; // Dừng lại để hiển thị hiệu ứng ánh vàng
+                typeSpeed = 2200;
                 isDeleting = true;
             } else if (isDeleting && charIdx === 0) {
                 isDeleting = false;
@@ -228,48 +247,100 @@
         }
         typeEffect();
 
-        /* CANVAS STORM ENGINE & PROCEDURAL LIGHTNING */
+        /* HIGH-END 3D MULTI-LAYER STORM ENGINE */
         const canvas = document.getElementById('stormCanvas');
         const ctx = canvas.getContext('2d');
         const flashElem = document.getElementById('lightningFlash');
+        const groundElem = document.getElementById('groundReflection');
 
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
         window.addEventListener('resize', () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; });
 
+        // Tạo hạt mưa theo độ sâu (Layered Depth 3D)
         const rainDrops = [];
-        for (let i = 0; i < 250; i++) {
+        const dropCount = 450;
+
+        for (let i = 0; i < dropCount; i++) {
+            let depth = Math.random(); // Depth từ 0 (xa) tới 1 (gần)
             rainDrops.push({
-                x: Math.random() * width * 1.5 - width * 0.2, y: Math.random() * height,
-                length: Math.random() * 30 + 20, speed: Math.random() * 16 + 14,
-                opacity: Math.random() * 0.4 + 0.2, wind: Math.random() * 4 + 6
+                x: Math.random() * width * 1.6 - width * 0.3,
+                y: Math.random() * height,
+                length: depth * 40 + 15,
+                speed: depth * 22 + 12,
+                opacity: depth * 0.5 + 0.15,
+                width: depth * 1.8 + 0.5,
+                wind: depth * 8 + 12
             });
+        }
+
+        // Vẽ tia sét phân nhánh bằng giải thuật Fractal
+        function drawLightningBranch(x1, y1, angle, length, branchDepth) {
+            if (branchDepth <= 0 || length < 5) return;
+
+            let x2 = x1 + Math.cos(angle) * length;
+            let y2 = y1 + Math.sin(angle) * length;
+
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.strokeStyle = '#e0f2fe';
+            ctx.shadowColor = '#00f2fe';
+            ctx.shadowBlur = 20;
+            ctx.lineWidth = branchDepth * 1.5;
+            ctx.stroke();
+
+            // Rẽ nhánh ngẫu nhiên
+            let numBranches = Math.floor(Math.random() * 2) + 1;
+            for (let i = 0; i < numBranches; i++) {
+                let newAngle = angle + (Math.random() - 0.5) * 0.8;
+                drawLightningBranch(x2, y2, newAngle, length * (0.6 + Math.random() * 0.3), branchDepth - 1);
+            }
         }
 
         function drawRain() {
             ctx.clearRect(0, 0, width, height);
+            
+            // Vẽ hệ thống hạt mưa
             for (let d of rainDrops) {
                 ctx.beginPath();
                 ctx.moveTo(d.x, d.y);
-                ctx.lineTo(d.x - d.wind * 2, d.y + d.length);
+                ctx.lineTo(d.x - d.wind * 1.5, d.y + d.length);
                 ctx.strokeStyle = `rgba(186, 230, 253, ${d.opacity})`;
-                ctx.lineWidth = 1.2;
+                ctx.lineWidth = d.width;
                 ctx.stroke();
 
-                d.y += d.speed; d.x -= d.wind;
-                if (d.y > height) { d.y = -d.length; d.x = Math.random() * width * 1.5 - width * 0.2; }
+                d.y += d.speed;
+                d.x -= d.wind * 0.3;
+
+                if (d.y > height) {
+                    d.y = -d.length;
+                    d.x = Math.random() * width * 1.6 - width * 0.3;
+                }
             }
+
             requestAnimationFrame(drawRain);
         }
         drawRain();
 
+        // Kích hoạt hiệu ứng chớp sấm chớp chân thực
         function triggerLightning() {
-            if (Math.random() < 0.3) {
-                flashElem.style.opacity = '0.9';
-                setTimeout(() => { flashElem.style.opacity = '0'; }, 80);
+            if (Math.random() < 0.35) {
+                // Sét đánh từ trên trời
+                let startX = Math.random() * width;
+                drawLightningBranch(startX, 0, Math.PI / 2 + (Math.random() - 0.5) * 0.3, 80, 5);
+
+                flashElem.style.opacity = '0.95';
+                groundElem.style.opacity = '1';
+
+                setTimeout(() => { 
+                    flashElem.style.opacity = '0'; 
+                    groundElem.style.opacity = '0';
+                }, 90);
+
                 if (isPlaying) playThunderSound();
             }
-            setTimeout(triggerLightning, Math.random() * 4000 + 3000);
+            setTimeout(triggerLightning, Math.random() * 3500 + 2500);
         }
         triggerLightning();
 
@@ -308,7 +379,7 @@
             });
         }
 
-        /* WEB AUDIO API ENGINE - ÂM THANH MƯA BẢO & SẤM RỀN THẬT */
+        /* WEB AUDIO API ENGINE - MƯA BẢO & SẤM RỀN */
         let audioCtx = null;
         let isPlaying = false;
         let rainNode = null;
