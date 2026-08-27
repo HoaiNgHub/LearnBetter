@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HNG ACADEMY - Real Life Storm Edition</title>
+    <title>HNG ACADEMY - Ultra Real Storm</title>
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,8 +13,8 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
         :root {
-            --bg-color: #020617;
-            --card-bg: rgba(15, 23, 42, 0.65);
+            --bg-color: #030712;
+            --card-bg: rgba(15, 23, 42, 0.75);
             --card-border: rgba(56, 189, 248, 0.25);
             --text-main: #f8fafc;
             --text-sub: #94a3b8;
@@ -23,32 +23,26 @@
 
         body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; overflow-x: hidden; position: relative; }
 
-        /* REAL LIFE VIDEO BACKGROUND CONTAINER */
-        .real-storm-container {
+        /* REAL-LIFE CANVAS STORM BACKDROP */
+        .storm-container {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 0; overflow: hidden;
+            pointer-events: none; z-index: 0; background: #030712; overflow: hidden;
         }
 
-        .bg-storm-video {
-            width: 100%; height: 100%; object-fit: cover;
-            filter: brightness(0.55) contrast(1.15) saturate(1.2);
-            transform: scale(1.05); /* Chống viền trắng khi hiệu ứng nhúc nhích */
-            transition: transform 0.1s ease-out;
-        }
+        #stormCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        
+        /* Wet Glass Rain Drops Canvas */
+        #dropCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; opacity: 0.75; }
 
-        /* Lớp Overlay phủ làm dịu video & hiệu ứng sương mù kính wet-glass */
-        .video-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, transparent 30%, rgba(2, 6, 23, 0.85) 100%),
-                        linear-gradient(to bottom, rgba(3, 7, 18, 0.4), rgba(3, 7, 18, 0.9));
-            backdrop-filter: blur(2px);
+        .lightning-flash { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(224, 242, 254, 0.9); opacity: 0; z-index: 3; transition: opacity 0.05s ease-out; }
+        
+        .storm-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 4;
+            background: radial-gradient(circle at center, transparent 20%, rgba(3, 7, 18, 0.8) 100%);
         }
-
-        /* Flash chớp khi có sấm */
-        .lightning-flash { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.85); opacity: 0; transition: opacity 0.05s ease-out; mix-blend-mode: overlay; }
 
         /* Header / Navigation */
-        header { position: sticky; top: 0; z-index: 100; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+        header { position: sticky; top: 0; z-index: 100; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
         .nav-logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.3rem; text-decoration: none; color: #fff; }
         .nav-logo-badge { background: linear-gradient(135deg, #7928CA, #FF007A); padding: 6px 14px; border-radius: 10px; font-size: 0.85rem; font-weight: 900; box-shadow: 0 0 20px rgba(255, 0, 122, 0.5); }
         .nav-links { display: flex; gap: 20px; list-style: none; align-items: center; }
@@ -56,7 +50,7 @@
         .nav-btn:hover { background: rgba(0, 242, 254, 0.15); border-color: var(--accent-glow); color: var(--accent-glow); box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
 
         /* Hero Section */
-        .hero { position: relative; z-index: 10; text-align: center; padding: 70px 20px 30px; max-width: 1000px; margin: 0 auto; }
+        .hero { position: relative; z-index: 10; text-align: center; padding: 60px 20px 30px; max-width: 1000px; margin: 0 auto; }
         .main-title { font-family: 'Syne', sans-serif; font-size: clamp(3.5rem, 8vw, 6.5rem); font-weight: 800; text-transform: uppercase; background: linear-gradient(135deg, #FF007A 0%, #7928CA 30%, #00DFD8 70%, #FFD700 100%); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: vibrantGradient 6s ease infinite; filter: drop-shadow(0 10px 35px rgba(121, 40, 202, 0.6)); margin-bottom: 15px; }
         @keyframes vibrantGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         
@@ -75,14 +69,14 @@
         }
         @keyframes goldShimmer { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
 
-        /* Search Bar Live Filter */
+        /* Search Bar */
         .search-container { max-width: 650px; margin: 0 auto 40px; }
         .search-box { display: flex; align-items: center; background: rgba(15, 23, 42, 0.85); border: 2px solid rgba(0, 242, 254, 0.3); border-radius: 50px; padding: 6px 10px 6px 24px; box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5); }
         .search-input { width: 100%; background: transparent; border: none; outline: none; color: #fff; font-size: 1.05rem; }
         .search-btn { background: linear-gradient(135deg, #00f2fe, #4facfe); border: none; color: #000; font-weight: 800; padding: 12px 28px; border-radius: 40px; cursor: pointer; transition: 0.3s; }
         .search-btn:hover { transform: scale(1.05); }
 
-        /* Bento Grid Section */
+        /* Bento Grid Layout */
         .main-container { max-width: 1280px; margin: 0 auto; padding: 0 24px 100px; position: relative; z-index: 10; }
         .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
         .bento-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 24px; padding: 28px; backdrop-filter: blur(16px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; position: relative; overflow: hidden; }
@@ -90,7 +84,7 @@
         .bento-card.wide { grid-column: span 2; }
         .card-icon { width: 50px; height: 50px; border-radius: 14px; background: rgba(0, 242, 254, 0.1); display: flex; justify-content: center; align-items: center; font-size: 1.5rem; color: var(--accent-glow); margin-bottom: 20px; }
 
-        /* Code Viewer Modal (VS Code Style) */
+        /* Code Viewer Modal */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(3, 7, 18, 0.85); backdrop-filter: blur(12px); z-index: 999; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.3s ease; }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
         .code-modal { width: 90%; max-width: 800px; background: #0d1117; border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 20px; box-shadow: 0 25px 60px rgba(0,0,0,0.9); overflow: hidden; }
@@ -102,7 +96,7 @@
         .copy-btn { background: rgba(255,255,255,0.1); border: none; color: #fff; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; transition: 0.2s; }
         .copy-btn:hover { background: var(--accent-glow); color: #000; }
 
-        /* Floating Audio Player Widget */
+        /* Floating Audio Widget */
         .audio-player-widget { position: fixed; bottom: 25px; right: 25px; z-index: 90; background: rgba(15, 23, 42, 0.9); border: 1px solid var(--card-border); padding: 12px 20px; border-radius: 50px; backdrop-filter: blur(16px); display: flex; align-items: center; gap: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); cursor: pointer; transition: 0.3s ease; }
         .audio-player-widget:hover { border-color: var(--accent-glow); transform: scale(1.03); }
         .visualizer-canvas { width: 60px; height: 25px; }
@@ -112,14 +106,12 @@
 </head>
 <body>
 
-    <!-- Real-life Storm Background Container -->
-    <div class="real-storm-container">
-        <!-- Video bão thực tế 4K Ultra-HD từ Pixabay CDN -->
-        <video class="bg-storm-video" id="stormVideo" autoplay loop muted playsinline>
-            <source src="https://cdn.pixabay.com/video/2021/04/12/70884-536968032_large.mp4" type="video/mp4">
-        </video>
-        <div class="video-overlay"></div>
+    <!-- Real Storm Backdrop -->
+    <div class="storm-container">
+        <canvas id="stormCanvas"></canvas>
+        <canvas id="dropCanvas"></canvas>
         <div class="lightning-flash" id="lightningFlash"></div>
+        <div class="storm-overlay"></div>
     </div>
 
     <!-- Header / Navbar -->
@@ -180,7 +172,7 @@
         </div>
     </main>
 
-    <!-- Code Viewer Modal (VS Code Theme) -->
+    <!-- Code Viewer Modal -->
     <div class="modal-overlay" id="codeModal">
         <div class="code-modal">
             <div class="vscode-header">
@@ -198,7 +190,7 @@
         </div>
     </div>
 
-    <!-- Floating Audio Widget Tích Hợp Âm Thanh Thật -->
+    <!-- Floating Audio Widget -->
     <div class="audio-player-widget" id="audioWidget" onclick="toggleAudioEngine()">
         <i class="fa-solid fa-volume-xmark" id="audioIcon" style="color: #ff007a; font-size: 1.2rem;"></i>
         <div>
@@ -210,14 +202,6 @@
 
     <!-- JavaScript Master Engine -->
     <script>
-        /* HIỆU ỨNG PARALLAX THEO CON TRỎ CHUỘT (TẠO ĐỘ SÂU BẢO REAL-LIFE) */
-        const video = document.getElementById('stormVideo');
-        window.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 15;
-            const y = (e.clientY / window.innerHeight - 0.5) * 15;
-            video.style.transform = `scale(1.08) translate(${x}px, ${y}px)`;
-        });
-
         /* TYPEWRITER EFFECT VỚI CHỮ GOLD */
         const textArr = [
             "HNG/HoàiNg", 
@@ -252,17 +236,114 @@
         }
         typeEffect();
 
-        /* HIỆU ỨNG SẤM CHỚP ĐỒNG BỘ CẢNH REAL */
+        /* REALISTIC CANVAS STORM & RAIN DROPS GLASS ENGINE */
+        const sCanvas = document.getElementById('stormCanvas');
+        const sCtx = sCanvas.getContext('2d');
+        const dCanvas = document.getElementById('dropCanvas');
+        const dCtx = dCanvas.getContext('2d');
         const flashElem = document.getElementById('lightningFlash');
-        function triggerRealLightning() {
-            if (Math.random() < 0.4) {
-                flashElem.style.opacity = '0.85';
-                setTimeout(() => { flashElem.style.opacity = '0'; }, 70);
+
+        let w = sCanvas.width = dCanvas.width = window.innerWidth;
+        let h = sCanvas.height = dCanvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            w = sCanvas.width = dCanvas.width = window.innerWidth;
+            h = sCanvas.height = dCanvas.height = window.innerHeight;
+            initGlassDrops();
+        });
+
+        // Background Dynamic Heavy Rain
+        const rainLines = [];
+        for (let i = 0; i < 400; i++) {
+            let depth = Math.random();
+            rainLines.push({
+                x: Math.random() * w * 1.5 - w * 0.2,
+                y: Math.random() * h,
+                length: depth * 50 + 20,
+                speed: depth * 25 + 15,
+                opacity: depth * 0.4 + 0.1,
+                width: depth * 1.5 + 0.5
+            });
+        }
+
+        function renderStormRain() {
+            sCtx.clearRect(0, 0, w, h);
+            
+            // Background Storm Fog Gradient
+            let grad = sCtx.createLinearGradient(0, 0, 0, h);
+            grad.addColorStop(0, '#0b1329');
+            grad.addColorStop(0.5, '#090d16');
+            grad.addColorStop(1, '#030712');
+            sCtx.fillStyle = grad;
+            sCtx.fillRect(0, 0, w, h);
+
+            for (let r of rainLines) {
+                sCtx.beginPath();
+                sCtx.moveTo(r.x, r.y);
+                sCtx.lineTo(r.x - 12, r.y + r.length);
+                sCtx.strokeStyle = `rgba(186, 230, 253, ${r.opacity})`;
+                sCtx.lineWidth = r.width;
+                sCtx.stroke();
+
+                r.y += r.speed;
+                r.x -= 3;
+                if (r.y > h) {
+                    r.y = -r.length;
+                    r.x = Math.random() * w * 1.5 - w * 0.2;
+                }
+            }
+            requestAnimationFrame(renderStormRain);
+        }
+        renderStormRain();
+
+        // Foreground Wet Glass Raindrops (Giọt nước đọng trên kính)
+        const glassDrops = [];
+        function initGlassDrops() {
+            glassDrops.length = 0;
+            for (let i = 0; i < 65; i++) {
+                glassDrops.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    r: Math.random() * 3.5 + 1.5,
+                    vy: Math.random() * 0.8 + 0.2
+                });
+            }
+        }
+        initGlassDrops();
+
+        function renderGlassDrops() {
+            dCtx.clearRect(0, 0, w, h);
+            for (let g of glassDrops) {
+                dCtx.beginPath();
+                dCtx.arc(g.x, g.y, g.r, 0, Math.PI * 2);
+                dCtx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+                dCtx.fill();
+                
+                // Highlight viền giọt nước
+                dCtx.strokeStyle = 'rgba(0, 242, 254, 0.5)';
+                dCtx.lineWidth = 0.8;
+                dCtx.stroke();
+
+                g.y += g.vy;
+                if (g.y > h) {
+                    g.y = -10;
+                    g.x = Math.random() * w;
+                }
+            }
+            requestAnimationFrame(renderGlassDrops);
+        }
+        renderGlassDrops();
+
+        // Lightning Trigger
+        function triggerLightning() {
+            if (Math.random() < 0.35) {
+                flashElem.style.opacity = '0.9';
+                setTimeout(() => { flashElem.style.opacity = '0'; }, 80);
                 if (isPlaying) playThunderSound();
             }
-            setTimeout(triggerRealLightning, Math.random() * 4000 + 3000);
+            setTimeout(triggerLightning, Math.random() * 3500 + 2500);
         }
-        triggerRealLightning();
+        triggerLightning();
 
         /* CODE VIEWER MODAL CONTENT */
         const codeSamples = {
