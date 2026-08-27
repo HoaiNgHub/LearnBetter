@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HNG ACADEMY - Masterpiece UI/UX Edition</title>
+    <title>HNG ACADEMY - Masterpiece Edition</title>
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,8 +42,21 @@
         .main-title { font-family: 'Syne', sans-serif; font-size: clamp(3.5rem, 8vw, 6.5rem); font-weight: 800; text-transform: uppercase; background: linear-gradient(135deg, #FF007A 0%, #7928CA 30%, #00DFD8 70%, #FFD700 100%); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: vibrantGradient 6s ease infinite; filter: drop-shadow(0 10px 35px rgba(121, 40, 202, 0.6)); margin-bottom: 15px; }
         @keyframes vibrantGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         
-        .typewriter-box { font-size: 1.3rem; color: var(--text-sub); font-weight: 600; margin-bottom: 35px; min-height: 35px; }
-        .gold-text { color: #fcf6ba; font-weight: 800; text-shadow: 0 0 10px rgba(252, 246, 186, 0.5); }
+        .typewriter-box { font-size: 1.3rem; color: var(--text-sub); font-weight: 600; margin-bottom: 35px; min-height: 45px; }
+        
+        /* Hiệu ứng Vàng Kim Gold Phát Sáng Chạy Chạy */
+        .gold-text {
+            font-weight: 800;
+            background: linear-gradient(90deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #bf953f 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: goldShimmer 2.2s linear infinite;
+            display: inline-block;
+            filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.7));
+        }
+        @keyframes goldShimmer { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
 
         /* Search Bar Live Filter */
         .search-container { max-width: 650px; margin: 0 auto 40px; }
@@ -177,8 +190,13 @@
 
     <!-- JavaScript Master Engine -->
     <script>
-        /* TYPEWRITER EFFECT */
-        const textArr = ["HNG / HoàiNg", "Olympic Coder", "Master UI/UX Designer"];
+        /* TYPEWRITER EFFECT VỚI CÁC CHỮ MỚI PHỦ GOLD */
+        const textArr = [
+            "HNG/HoàiNg", 
+            "Thanh Hoài", 
+            "10a8 Không Gì Là Không Dám!"
+        ];
+
         let textIdx = 0, charIdx = 0, isDeleting = false;
         const typeElem = document.getElementById('typewriterText');
 
@@ -192,11 +210,15 @@
                 charIdx++;
             }
 
-            let typeSpeed = isDeleting ? 50 : 100;
+            let typeSpeed = isDeleting ? 40 : 80;
+
             if (!isDeleting && charIdx === currentText.length) {
-                typeSpeed = 2000; isDeleting = true;
+                typeSpeed = 2200; // Dừng lại để hiển thị hiệu ứng ánh vàng
+                isDeleting = true;
             } else if (isDeleting && charIdx === 0) {
-                isDeleting = false; textIdx = (textIdx + 1) % textArr.length; typeSpeed = 500;
+                isDeleting = false;
+                textIdx = (textIdx + 1) % textArr.length;
+                typeSpeed = 400;
             }
             setTimeout(typeEffect, typeSpeed);
         }
