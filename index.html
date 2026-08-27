@@ -3,268 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HNG ACADEMY - Ultra VIP Storm Sadboy Edition</title>
-    <!-- Google Fonts -->
+    <title>HNG ACADEMY - Masterpiece UI/UX Edition</title>
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
         :root {
-            --bg-color: #06090e;
-            --card-bg: rgba(15, 23, 42, 0.65);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --text-main: #f8fafc;
-            --text-sub: #94a3b8;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            transition: background-color 0.5s ease;
-        }
-
-        /* ==================== STAGED BACKGROUND: VŨ TRỤ ==================== */
-        .space-container {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 0; overflow: hidden;
-            background: radial-gradient(circle at 50% 20%, #0f172a 0%, #06090e 80%);
-            transition: opacity 0.8s ease;
-        }
-
-        .stars {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: transparent url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><circle cx="100" cy="150" r="1.5" fill="%23ffffff" opacity="0.8"/><circle cx="300" cy="80" r="1" fill="%2300f2fe" opacity="0.6"/><circle cx="650" cy="220" r="2" fill="%23ffffff" opacity="0.9"/></svg>') repeat;
-            animation: twinkle 4s ease-in-out infinite alternate;
-        }
-        @keyframes twinkle { 0% { opacity: 0.3; } 100% { opacity: 1; } }
-
-        .shooting-star {
-            position: absolute; top: 50%; left: 50%; height: 2px;
-            background: linear-gradient(-45deg, rgba(0, 242, 254, 1), rgba(255, 255, 255, 0));
-            animation: tail 3s ease-in-out infinite, shooting 3s ease-in-out infinite; opacity: 0;
-        }
-        .shooting-star:nth-child(1) { top: -10%; left: 30%; animation-delay: 0s; animation-duration: 3.5s; }
-        .shooting-star:nth-child(2) { top: -5%; left: 60%; animation-delay: 1.2s; animation-duration: 4s; }
-
-        @keyframes tail { 0% { width: 0; } 30% { width: 150px; } 100% { width: 0; } }
-        @keyframes shooting { 0% { transform: translateX(0) translateY(0) rotate(45deg); opacity: 1; } 100% { transform: translateX(1000px) translateY(1000px) rotate(45deg); opacity: 0; } }
-
-        .bg-glow-1, .bg-glow-2 { position: fixed; pointer-events: none; z-index: 0; filter: blur(90px); transition: opacity 0.8s ease; }
-        .bg-glow-1 { top: -100px; left: 50%; transform: translateX(-50%); width: 800px; height: 400px; background: radial-gradient(circle, rgba(121, 40, 202, 0.35) 0%, rgba(0, 242, 254, 0.15) 50%, transparent 80%); }
-        .bg-glow-2 { bottom: -150px; right: -100px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255, 215, 0, 0.12) 0%, rgba(255, 0, 122, 0.1) 50%, transparent 80%); }
-
-        /* ==================== SADBOY STORM THEME ==================== */
-        .storm-theme-container {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 0; opacity: 0;
-            transition: opacity 0.8s ease;
-            background: linear-gradient(to bottom, #111827 0%, #1f2937 40%, #111827 85%, #030712 100%);
-            overflow: hidden;
-        }
-
-        #stormCanvas {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 2; pointer-events: none;
-        }
-
-        .lightning-flash {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.9); opacity: 0;
-            z-index: 1; pointer-events: none;
-            transition: opacity 0.05s ease-out;
-        }
-
-        .storm-cloud {
-            position: absolute; background: radial-gradient(circle, rgba(55, 65, 81, 0.8) 0%, rgba(17, 24, 39, 0.95) 80%);
-            border-radius: 50%; filter: blur(25px); z-index: 1;
-            animation: cloudChurn 18s ease-in-out infinite alternate;
-        }
-        .cloud-a { top: -80px; left: -100px; width: 800px; height: 280px; }
-        .cloud-b { top: -50px; right: -150px; width: 900px; height: 320px; animation-duration: 25s; }
-        @keyframes cloudChurn { 0% { transform: scale(1) translateX(0); } 100% { transform: scale(1.1) translateX(60px); } }
-
-        .storm-svg {
-            position: absolute; bottom: 0; width: 100%; height: 70vh; z-index: 3;
-        }
-
-        .storm-tree {
-            transform-origin: bottom center;
-            animation: violentWind 2.5s ease-in-out infinite alternate;
-        }
-        @keyframes violentWind {
-            0% { transform: rotate(0deg) skewX(0deg); }
-            50% { transform: rotate(-5deg) skewX(-4deg); }
-            100% { transform: rotate(-8deg) skewX(-7deg); }
-        }
-
-        .sad-lonely-boy {
-            transform-origin: bottom center;
-            animation: boyShiver 0.15s ease-in-out infinite alternate;
-        }
-        @keyframes boyShiver {
-            0% { transform: translateY(0) translateX(0); }
-            100% { transform: translateY(0.8px) translateX(-0.5px); }
-        }
-
-        body.sadboy-mode {
-            --bg-color: #0b0f17;
+            --bg-color: #030712;
             --card-bg: rgba(15, 23, 42, 0.75);
             --card-border: rgba(56, 189, 248, 0.2);
-            --text-main: #f1f5f9;
+            --text-main: #f8fafc;
             --text-sub: #94a3b8;
+            --accent-glow: #00f2fe;
         }
 
-        body.sadboy-mode .space-container,
-        body.sadboy-mode .bg-glow-1,
-        body.sadboy-mode .bg-glow-2 { opacity: 0; }
-        body.sadboy-mode .storm-theme-container { opacity: 1; }
-        body.sadboy-mode header { background: rgba(15, 23, 42, 0.75); border-bottom-color: rgba(56, 189, 248, 0.15); }
-        body.sadboy-mode .search-box { background: rgba(15, 23, 42, 0.85); border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 0 25px rgba(0, 0, 0, 0.5); }
+        body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; overflow-x: hidden; position: relative; }
 
-        /* ==================== HEADER & NAVBAR ==================== */
-        header {
-            position: sticky; top: 0; z-index: 100;
-            background: rgba(8, 11, 17, 0.85); backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--card-border);
-            padding: 16px 32px; display: flex; justify-content: space-between; align-items: center;
-            transition: all 0.5s ease;
-        }
+        /* Background Canvas & Storm Theme */
+        .storm-theme-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 0; background: linear-gradient(to bottom, #0b0f19 0%, #111827 50%, #030712 100%); }
+        #stormCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; }
+        .lightning-flash { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.95); opacity: 0; z-index: 1; transition: opacity 0.05s ease-out; }
+        .storm-svg { position: absolute; bottom: 0; width: 100%; height: 65vh; z-index: 3; }
 
-        .nav-logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.25rem; text-decoration: none; color: #fff; }
-        .nav-logo-badge { background: linear-gradient(135deg, #7928CA, #FF007A); padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; box-shadow: 0 0 15px rgba(255, 0, 122, 0.4); }
+        /* Navigation Bar */
+        header { position: sticky; top: 0; z-index: 100; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.3rem; text-decoration: none; color: #fff; }
+        .nav-logo-badge { background: linear-gradient(135deg, #7928CA, #FF007A); padding: 6px 14px; border-radius: 10px; font-size: 0.85rem; font-weight: 900; box-shadow: 0 0 20px rgba(255, 0, 122, 0.5); }
+        .nav-links { display: flex; gap: 20px; list-style: none; align-items: center; }
+        .nav-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); padding: 8px 18px; border-radius: 30px; color: var(--text-main); font-weight: 600; cursor: pointer; transition: 0.3s ease; display: flex; align-items: center; gap: 8px; }
+        .nav-btn:hover { background: rgba(0, 242, 254, 0.15); border-color: var(--accent-glow); color: var(--accent-glow); box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
 
-        .nav-links { display: flex; gap: 18px; list-style: none; align-items: center; }
-        .nav-links a, .nav-btn { color: var(--text-sub); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; cursor: pointer; background: transparent; border: none; }
-        .nav-links a:hover, .nav-links a.active { color: #00f2fe; text-shadow: 0 0 10px rgba(0, 242, 254, 0.5); }
-
-        .ai-chat-btn {
-            background: linear-gradient(135deg, #8a2be2, #00f2fe, #ff007a) !important;
-            background-size: 200% 200% !important; animation: aiGlow 3s ease infinite !important;
-            color: #ffffff !important; padding: 8px 18px !important; border-radius: 30px !important;
-            font-weight: 800 !important; box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.4) !important;
-        }
-        @keyframes aiGlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-
-        .theme-toggle-btn { background: rgba(255, 255, 255, 0.08) !important; border: 1px solid var(--card-border) !important; padding: 8px 16px !important; border-radius: 20px !important; color: var(--text-main) !important; }
-        .theme-toggle-btn:hover { background: rgba(0, 242, 254, 0.15) !important; border-color: #00f2fe !important; color: #00f2fe !important; }
-
-        /* ==================== HERO SECTION ==================== */
-        .hero { position: relative; z-index: 10; text-align: center; padding: 70px 20px 40px; max-width: 1100px; margin: 0 auto; }
-        .main-title {
-            font-family: 'Syne', sans-serif; font-size: clamp(3.2rem, 7.5vw, 6rem); font-weight: 800;
-            letter-spacing: 2px; line-height: 1.05; text-transform: uppercase;
-            background: linear-gradient(135deg, #FF007A 0%, #7928CA 30%, #00DFD8 70%, #FFD700 100%);
-            background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: vibrantGradient 6s ease infinite; filter: drop-shadow(0 8px 30px rgba(121, 40, 202, 0.5)); margin-bottom: 20px;
-        }
+        /* Hero Section */
+        .hero { position: relative; z-index: 10; text-align: center; padding: 60px 20px 30px; max-width: 1000px; margin: 0 auto; }
+        .main-title { font-family: 'Syne', sans-serif; font-size: clamp(3.5rem, 8vw, 6.5rem); font-weight: 800; text-transform: uppercase; background: linear-gradient(135deg, #FF007A 0%, #7928CA 30%, #00DFD8 70%, #FFD700 100%); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: vibrantGradient 6s ease infinite; filter: drop-shadow(0 10px 35px rgba(121, 40, 202, 0.6)); margin-bottom: 15px; }
         @keyframes vibrantGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        
+        .typewriter-box { font-size: 1.3rem; color: var(--text-sub); font-weight: 600; margin-bottom: 35px; min-height: 35px; }
+        .gold-text { color: #fcf6ba; font-weight: 800; text-shadow: 0 0 10px rgba(252, 246, 186, 0.5); }
 
-        .subtitle { font-size: clamp(1.1rem, 2.5vw, 1.45rem); color: var(--text-sub); font-weight: 500; margin-bottom: 40px; }
-        .gold-running-text {
-            font-weight: 900; background: linear-gradient(90deg, #bf953f 0%, #fcf6ba 20%, #b38728 40%, #fbf5b7 60%, #aa771c 80%, #bf953f 100%);
-            background-size: 200% auto; color: transparent; -webkit-background-clip: text;
-            animation: goldShimmer 2.2s linear infinite; display: inline-block; filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.6));
-        }
-        @keyframes goldShimmer { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
-
-        /* SEARCH BAR LIVE FILTER */
-        .search-container { max-width: 680px; margin: 0 auto 35px; }
-        .search-box { display: flex; align-items: center; background: rgba(18, 24, 38, 0.85); border: 2px solid rgba(0, 242, 254, 0.25); border-radius: 50px; padding: 8px 12px 8px 24px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); transition: all 0.3s ease; }
-        .search-input { width: 100%; background: transparent; border: none; outline: none; color: var(--text-main); font-size: 1.05rem; }
-        .search-btn { background: linear-gradient(135deg, #00f2fe, #4facfe); border: none; color: #000; font-weight: 800; padding: 12px 26px; border-radius: 40px; cursor: pointer; transition: 0.3s; }
+        /* Search Bar Live Filter */
+        .search-container { max-width: 650px; margin: 0 auto 40px; }
+        .search-box { display: flex; align-items: center; background: rgba(15, 23, 42, 0.85); border: 2px solid rgba(0, 242, 254, 0.3); border-radius: 50px; padding: 6px 10px 6px 24px; box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5); }
+        .search-input { width: 100%; background: transparent; border: none; outline: none; color: #fff; font-size: 1.05rem; }
+        .search-btn { background: linear-gradient(135deg, #00f2fe, #4facfe); border: none; color: #000; font-weight: 800; padding: 12px 28px; border-radius: 40px; cursor: pointer; transition: 0.3s; }
         .search-btn:hover { transform: scale(1.05); }
 
-        /* GRID CONTENT WITH 3D TILT EFFECT */
-        .main-container { max-width: 1280px; margin: 0 auto; padding: 0 24px 80px; position: relative; z-index: 10; }
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 28px; }
-        .card { 
-            background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; overflow: hidden; backdrop-filter: blur(12px); 
-            transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease; padding: 22px; cursor: pointer;
-        }
-        .card:hover {
-            border-color: #00f2fe; box-shadow: 0 10px 30px rgba(0, 242, 254, 0.2);
-        }
+        /* Bento Grid Layout */
+        .main-container { max-width: 1280px; margin: 0 auto; padding: 0 24px 100px; position: relative; z-index: 10; }
+        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .bento-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 24px; padding: 28px; backdrop-filter: blur(16px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; position: relative; overflow: hidden; }
+        .bento-card:hover { border-color: var(--accent-glow); box-shadow: 0 15px 35px rgba(0, 242, 254, 0.25); transform: translateY(-6px); }
+        .bento-card.wide { grid-column: span 2; }
+        .card-icon { width: 50px; height: 50px; border-radius: 14px; background: rgba(0, 242, 254, 0.1); display: flex; justify-content: center; align-items: center; font-size: 1.5rem; color: var(--accent-glow); margin-bottom: 20px; }
 
-        /* AI CHAT MODAL INTERFACE */
-        .ai-modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(3, 7, 18, 0.7); backdrop-filter: blur(10px);
-            z-index: 999; display: flex; justify-content: center; align-items: center;
-            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
-        }
-        .ai-modal-overlay.active { opacity: 1; pointer-events: auto; }
-        .ai-modal {
-            width: 90%; max-width: 550px; height: 600px; background: rgba(15, 23, 42, 0.95);
-            border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 24px; display: flex; flex-direction: column;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 242, 254, 0.2); overflow: hidden;
-            transform: translateY(30px); transition: transform 0.4s ease;
-        }
-        .ai-modal-overlay.active .ai-modal { transform: translateY(0); }
-        .ai-header { padding: 18px 24px; background: rgba(30, 41, 59, 0.8); border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; }
-        .ai-chat-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; }
-        .chat-msg { max-width: 80%; padding: 12px 16px; border-radius: 16px; font-size: 0.95rem; line-height: 1.4; }
-        .chat-msg.bot { background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(0, 242, 254, 0.2); align-self: flex-start; color: #f8fafc; }
-        .chat-msg.user { background: linear-gradient(135deg, #7928CA, #FF007A); align-self: flex-end; color: #fff; }
-        .ai-input-box { padding: 16px; border-top: 1px solid var(--card-border); display: flex; gap: 10px; background: rgba(15, 23, 42, 0.9); }
-        .ai-input-box input { flex: 1; background: rgba(30, 41, 59, 0.8); border: 1px solid var(--card-border); border-radius: 30px; padding: 10px 18px; color: #fff; outline: none; }
-        .ai-input-box button { background: linear-gradient(135deg, #00f2fe, #4facfe); border: none; width: 42px; height: 42px; border-radius: 50%; color: #000; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: center; align-items: center; }
+        /* Code Viewer Modal (VS Code Style) */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(3, 7, 18, 0.85); backdrop-filter: blur(12px); z-index: 999; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.3s ease; }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .code-modal { width: 90%; max-width: 800px; background: #0d1117; border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 20px; box-shadow: 0 25px 60px rgba(0,0,0,0.9); overflow: hidden; }
+        .vscode-header { background: #161b22; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .dots { display: flex; gap: 8px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot.red { background: #ff5f56; } .dot.yellow { background: #ffbd2e; } .dot.green { background: #27c93f; }
+        .vscode-body { padding: 24px; font-family: 'Fira Code', monospace; color: #e6edf3; font-size: 0.95rem; line-height: 1.6; max-height: 450px; overflow-y: auto; background: #0d1117; }
+        .copy-btn { background: rgba(255,255,255,0.1); border: none; color: #fff; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; transition: 0.2s; }
+        .copy-btn:hover { background: var(--accent-glow); color: #000; }
+
+        /* Floating Audio Player & Visualizer */
+        .audio-player-widget { position: fixed; bottom: 25px; right: 25px; z-index: 90; background: rgba(15, 23, 42, 0.9); border: 1px solid var(--card-border); padding: 12px 20px; border-radius: 50px; backdrop-filter: blur(16px); display: flex; align-items: center; gap: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); }
+        .visualizer-canvas { width: 60px; height: 25px; }
+
+        @media (max-width: 900px) { .bento-grid { grid-template-columns: 1fr; } .bento-card.wide { grid-column: span 1; } }
     </style>
 </head>
-<body class="sadboy-mode">
+<body>
 
-    <!-- THEME 1: VŨ TRỤ BAN ĐẦU -->
-    <div class="space-container">
-        <div class="stars"></div>
-        <div class="shooting-star"></div>
-        <div class="shooting-star"></div>
-    </div>
-    <div class="bg-glow-1"></div>
-    <div class="bg-glow-2"></div>
-
-    <!-- THEME 2: SADBOY ANIME BẢO TỐ CINEMATIC -->
+    <!-- Storm Theme Container -->
     <div class="storm-theme-container">
         <div class="lightning-flash" id="lightningFlash"></div>
-        <div class="storm-cloud cloud-a"></div>
-        <div class="storm-cloud cloud-b"></div>
-        
         <canvas id="stormCanvas"></canvas>
 
         <svg class="storm-svg" viewBox="0 0 1440 600" preserveAspectRatio="none">
-            <path fill="#111827" opacity="0.7" d="M0,280 C300,180 550,260 880,190 C1180,130 1320,240 1440,200 L1440,600 L0,600 Z"></path>
-            <path fill="#0f172a" opacity="0.9" d="M0,350 C350,250 680,380 1080,280 C1280,230 1390,310 1440,320 L1440,600 L0,600 Z"></path>
-            <path fill="#030712" d="M-100,430 C350,320 750,470 1540,360 L1540,600 L-100,600 Z"></path>
-
-            <g transform="translate(1040, 130)">
-                <g class="storm-tree">
-                    <path d="M90,310 Q75,200 30,130 Q10,90 20,50 Q35,20 10,-20 M20,50 Q-20,20 -50,30 M30,130 Q90,90 120,60 M80,190 Q140,150 160,120" stroke="#030712" stroke-width="15" stroke-linecap="round" fill="none"/>
-                    <circle cx="10" cy="-20" r="20" fill="#0f172a" opacity="0.8"/>
-                    <circle cx="-50" cy="30" r="25" fill="#0f172a" opacity="0.7"/>
-                    <circle cx="120" cy="60" r="30" fill="#0f172a" opacity="0.9"/>
-                </g>
-
-                <g class="sad-lonely-boy" transform="translate(-20, 260)">
-                    <ellipse cx="25" cy="52" rx="26" ry="6" fill="#000000" opacity="0.9"/>
-                    <path d="M8,50 C8,28 18,18 30,18 C42,18 46,30 44,50 Z" fill="#020617"/>
-                    <circle cx="34" cy="14" r="10" fill="#020617"/>
-                    <path d="M16,36 C28,30 38,38 36,48" stroke="#020617" stroke-width="6" stroke-linecap="round" fill="none"/>
-                    <path d="M26,8 Q30,14 36,10 Q37,16 42,12" stroke="#020617" stroke-width="3" fill="none"/>
-                </g>
-            </g>
+            <path fill="#0f172a" opacity="0.8" d="M0,320 C350,220 680,350 1080,260 C1280,210 1390,290 1440,300 L1440,600 L0,600 Z"></path>
+            <path fill="#030712" d="M-100,400 C350,290 750,440 1540,330 L1540,600 L-100,600 Z"></path>
         </svg>
     </div>
 
@@ -275,141 +99,130 @@
             <span>ACADEMY</span>
         </a>
         <ul class="nav-links">
-            <li><a href="#" class="active"><i class="fa-solid fa-house"></i> Trang Chủ</a></li>
-            <li>
-                <button class="ai-chat-btn" onclick="openAiChat()">
-                    <i class="fa-solid fa-robot"></i> AI CHAT LIVE
-                </button>
-            </li>
-            <li>
-                <button class="nav-btn theme-toggle-btn" onclick="toggleTheme()">
-                    <i class="fa-solid fa-bolt" style="color: #38bdf8;"></i> Giao diện
-                </button>
-            </li>
-            <li><a href="#about"><i class="fa-solid fa-shield-halved"></i> Bản Quyền</a></li>
+            <li><button class="nav-btn"><i class="fa-solid fa-house"></i> Trang Chủ</button></li>
+            <li><button class="nav-btn" style="border-color: #ff007a; color: #ff007a;"><i class="fa-solid fa-robot"></i> AI Chat Studio</button></li>
+            <li><button class="nav-btn"><i class="fa-solid fa-code"></i> Kho Algorithm</button></li>
         </ul>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
         <h1 class="main-title">HNG ACADEMY</h1>
-        <p class="subtitle">
-            Trang Web được sáng lập và Độc Quyền bởi 
-            <span class="gold-running-text">HNG/HoàiNg</span>
-        </p>
+        <div class="typewriter-box">
+            Thế Giới Lập Trình Độc Quyền bởi <span class="gold-text" id="typewriterText"></span>
+        </div>
 
-        <!-- THANH TÌM KIẾM TỰ ĐỘNG FILTER -->
         <div class="search-container">
             <div class="search-box">
-                <i class="fa-solid fa-magnifying-glass" style="color: #38bdf8; margin-right: 12px;"></i>
-                <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm khoá học, thuật toán, mã nguồn..." onkeyup="filterCards()">
+                <i class="fa-solid fa-magnifying-glass" style="color: #00f2fe; margin-right: 12px;"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm khoá học, mã nguồn C++, Python, Web..." onkeyup="filterBentoGrid()">
                 <button class="search-btn">Tìm kiếm</button>
             </div>
         </div>
     </section>
 
-    <!-- Content Grid -->
+    <!-- Bento Grid Section -->
     <main class="main-container">
-        <div class="cards-grid" id="cardsGrid">
-            <div class="card" data-title="kho lap trinh toi uu">
-                <h3><i class="fa-solid fa-code" style="color: #38bdf8;"></i> Kho Lập Trình Tối Ưu</h3>
-                <p style="margin-top: 10px; color: var(--text-sub);">Nơi chia sẻ kiến thức và giải thuật tối ưu chuẩn Olympic bởi HNG/HoàiNg.</p>
+        <div class="bento-grid" id="bentoGrid">
+            <div class="bento-card wide" onclick="openCodeModal('c++')" data-title="c++ thuat toan olympic">
+                <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+                <h3>Thuật Toán C++ Olympic Tối Ưu</h3>
+                <p style="color: var(--text-sub); margin-top: 8px;">Tổng hợp cấu trúc dữ liệu Segment Tree, Fenwick Tree và thuật toán đồ thị nâng cao được biên soạn bởi HNG/HoàiNg.</p>
             </div>
-            <div class="card" data-title="tro ly ai chat tro ly thong minh">
-                <h3><i class="fa-solid fa-brain" style="color: #ff007a;"></i> Trợ Lý AI CHAT LIVE</h3>
-                <p style="margin-top: 10px; color: var(--text-sub);">Hỏi đáp bài tập, sửa lỗi code tức thì với AI thông minh tích hợp sẵn.</p>
+            
+            <div class="bento-card" onclick="openCodeModal('ai')" data-title="ai chat assistant tro ly">
+                <div class="card-icon" style="color: #ff007a; background: rgba(255, 0, 122, 0.1);"><i class="fa-solid fa-brain"></i></div>
+                <h3>AI Assistant 2026</h3>
+                <p style="color: var(--text-sub); margin-top: 8px;">Tích hợp AI hỗ trợ chấm code, debug lỗi cú pháp và tối ưu độ phức tạp thuật toán.</p>
             </div>
-            <div class="card" data-title="sadboy storm cinematic bao to u buon">
-                <h3><i class="fa-solid fa-cloud-showers-heavy" style="color: #38bdf8;"></i> Sadboy Storm Engine</h3>
-                <p style="margin-top: 10px; color: var(--text-sub);">Giao diện bão tố u buồn phức tạp với hiệu ứng tia sét đánh chẻ đôi độc quyền.</p>
+
+            <div class="bento-card" onclick="openCodeModal('web')" data-title="ui ux web design canvas 3d">
+                <div class="card-icon" style="color: #00dfd8; background: rgba(0, 223, 216, 0.1);"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h3>Thiết Kế UI/UX 3D</h3>
+                <p style="color: var(--text-sub); margin-top: 8px;">Kỹ thuật dựng hiệu ứng Canvas, Shader GLSL và giao diện bão tố Sadboy đỉnh cao.</p>
             </div>
-            <div class="card" data-title="am thanh bao to web audio api">
-                <h3><i class="fa-solid fa-volume-high" style="color: #00dfd8;"></i> Âm Thanh Bão Tố Spatial</h3>
-                <p style="margin-top: 10px; color: var(--text-sub);">Âm thanh mưa bão và tiếng sấm rền sống động được lập trình trực tiếp.</p>
+
+            <div class="bento-card wide" onclick="openCodeModal('python')" data-title="python data science machine learning">
+                <div class="card-icon" style="color: #ffd700; background: rgba(255, 215, 0, 0.1);"><i class="fa-brands fa-python"></i></div>
+                <h3>Python Machine Learning & Data</h3>
+                <p style="color: var(--text-sub); margin-top: 8px;">Lộ trình học AI, xử lý dữ liệu lớn và viết script tự động hóa dành cho lập trình viên chuyên nghiệp.</p>
             </div>
         </div>
     </main>
 
-    <!-- MODAL AI CHAT TRỰC TIẾP -->
-    <div class="ai-modal-overlay" id="aiModal">
-        <div class="ai-modal">
-            <div class="ai-header">
-                <span style="font-weight: 800; display: flex; align-items: center; gap: 8px;">
-                    <i class="fa-solid fa-robot" style="color: #00f2fe;"></i> HNG AI Assistant
-                </span>
-                <i class="fa-solid fa-xmark" style="cursor: pointer; font-size: 1.2rem;" onclick="closeAiChat()"></i>
+    <!-- Code Viewer Modal (VS Code Theme) -->
+    <div class="modal-overlay" id="codeModal">
+        <div class="code-modal">
+            <div class="vscode-header">
+                <div class="dots">
+                    <div class="dot red" onclick="closeCodeModal()"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <span style="font-size: 0.85rem; color: #8b949e; font-family: 'Fira Code', monospace;" id="modalFileName">solution.cpp</span>
+                <button class="copy-btn" onclick="copyCodeText()"><i class="fa-solid fa-copy"></i> Copy Code</button>
             </div>
-            <div class="ai-chat-body" id="chatBody">
-                <div class="chat-msg bot">Chào bạn! Tôi là Trợ lý AI HNG ACADEMY. Bạn cần giải bài tập hay hỗ trợ gì hôm nay?</div>
-            </div>
-            <div class="ai-input-box">
-                <input type="text" id="aiInput" placeholder="Nhập câu hỏi cho AI..." onkeydown="if(event.key==='Enter') sendAiMessage()">
-                <button onclick="sendAiMessage()"><i class="fa-solid fa-paper-plane"></i></button>
-            </div>
+            <pre class="vscode-body" id="modalCodeBody">
+// Đang tải mã nguồn...
+            </pre>
         </div>
     </div>
 
-    <!-- CANVAS ENGINE VIP: TIA SÉT CHẺ ĐÔI & MƯA TẠT & ÂM THANH BẢO TỐ -->
+    <!-- Floating Audio Widget -->
+    <div class="audio-player-widget">
+        <i class="fa-solid fa-music" style="color: #00f2fe;"></i>
+        <span style="font-size: 0.85rem; font-weight: 700;">Lofi Sadboy Storm</span>
+        <canvas class="visualizer-canvas" id="visualizerCanvas"></canvas>
+    </div>
+
+    <!-- JavaScript Master Engine -->
     <script>
+        /* TYPEWRITER EFFECT */
+        const textArr = ["HNG / HoàiNg", "Olympic Coder", "Master UI/UX Designer"];
+        let textIdx = 0, charIdx = 0, isDeleting = false;
+        const typeElem = document.getElementById('typewriterText');
+
+        function typeEffect() {
+            const currentText = textArr[textIdx];
+            if (isDeleting) {
+                typeElem.innerText = currentText.substring(0, charIdx - 1);
+                charIdx--;
+            } else {
+                typeElem.innerText = currentText.substring(0, charIdx + 1);
+                charIdx++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIdx === currentText.length) {
+                typeSpeed = 2000; isDeleting = true;
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false; textIdx = (textIdx + 1) % textArr.length; typeSpeed = 500;
+            }
+            setTimeout(typeEffect, typeSpeed);
+        }
+        typeEffect();
+
+        /* CANVAS STORM ENGINE & PROCEDURAL LIGHTNING */
         const canvas = document.getElementById('stormCanvas');
         const ctx = canvas.getContext('2d');
         const flashElem = document.getElementById('lightningFlash');
 
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
+        window.addEventListener('resize', () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; });
 
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        });
-
-        /* --- MƯA BẢO NGHIÊNG TẠT --- */
         const rainDrops = [];
-        const dropCount = 260;
-
-        for (let i = 0; i < dropCount; i++) {
+        for (let i = 0; i < 250; i++) {
             rainDrops.push({
-                x: Math.random() * width * 1.5 - width * 0.2,
-                y: Math.random() * height,
-                length: Math.random() * 35 + 20,
-                speed: Math.random() * 18 + 15,
-                opacity: Math.random() * 0.4 + 0.2,
-                wind: Math.random() * 4 + 6
+                x: Math.random() * width * 1.5 - width * 0.2, y: Math.random() * height,
+                length: Math.random() * 30 + 20, speed: Math.random() * 16 + 14,
+                opacity: Math.random() * 0.4 + 0.2, wind: Math.random() * 4 + 6
             });
         }
 
-        /* --- MÔ PHỎNG VẼ TIA SẾT ĐÁNH CHẺ ĐÔI (PROCEDURAL LIGHTNING) --- */
-        let activeLightning = null;
-
-        function createLightningBolt(startX, startY, length, angle, branchCapacity) {
-            let bolt = [];
-            let currX = startX;
-            let currY = startY;
-
-            for (let i = 0; i < length; i++) {
-                let step = Math.random() * 12 + 8;
-                let nextX = currX + Math.sin(angle) * step + (Math.random() - 0.5) * 12;
-                let nextY = currY + Math.cos(angle) * step;
-
-                bolt.push({ x1: currX, y1: currY, x2: nextX, y2: nextY });
-
-                if (branchCapacity > 0 && Math.random() < 0.15) {
-                    bolt = bolt.concat(createLightningBolt(nextX, nextY, Math.floor(length * 0.5), angle + (Math.random() - 0.5) * 0.8, branchCapacity - 1));
-                }
-
-                currX = nextX;
-                currY = nextY;
-                if (currY > height * 0.8) break;
-            }
-            return bolt;
-        }
-
-        function drawRainAndLightning() {
+        function drawRain() {
             ctx.clearRect(0, 0, width, height);
-
-            // Vẽ hạt mưa
-            for (let i = 0; i < dropCount; i++) {
-                const d = rainDrops[i];
+            for (let d of rainDrops) {
                 ctx.beginPath();
                 ctx.moveTo(d.x, d.y);
                 ctx.lineTo(d.x - d.wind * 2, d.y + d.length);
@@ -417,172 +230,70 @@
                 ctx.lineWidth = 1.2;
                 ctx.stroke();
 
-                d.y += d.speed;
-                d.x -= d.wind;
-
-                if (d.y > height) {
-                    d.y = -d.length;
-                    d.x = Math.random() * width * 1.5 - width * 0.2;
-                }
+                d.y += d.speed; d.x -= d.wind;
+                if (d.y > height) { d.y = -d.length; d.x = Math.random() * width * 1.5 - width * 0.2; }
             }
-
-            // Vẽ tia sét chẻ đôi điện áp
-            if (activeLightning) {
-                ctx.shadowColor = '#00f2fe';
-                ctx.shadowBlur = 20;
-                ctx.strokeStyle = '#ffffff';
-                ctx.lineWidth = 2.5;
-
-                ctx.beginPath();
-                for (let seg of activeLightning) {
-                    ctx.moveTo(seg.x1, seg.y1);
-                    ctx.lineTo(seg.x2, seg.y2);
-                }
-                ctx.stroke();
-                ctx.shadowBlur = 0;
-            }
-
-            requestAnimationFrame(drawRainAndLightning);
+            requestAnimationFrame(drawRain);
         }
-
-        drawRainAndLightning();
-
-        /* --- SẤM CHỚP & TẠO ÂM THANH MƯA (WEB AUDIO API) --- */
-        let audioCtx = null;
-
-        function playThunderSound() {
-            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-
-            // Web Audio Synth Tiếng Sấm Rền
-            let bufferSize = audioCtx.sampleRate * 1.5;
-            let buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-            let output = buffer.getChannelData(0);
-            for (let i = 0; i < bufferSize; i++) {
-                output[i] = Math.random() * 2 - 1;
-            }
-
-            let whiteNoise = audioCtx.createBufferSource();
-            whiteNoise.buffer = buffer;
-
-            let filter = audioCtx.createBiquadFilter();
-            filter.type = 'lowpass';
-            filter.frequency.setValueAtTime(120, audioCtx.currentTime);
-            filter.frequency.exponentialRampToValueAtTime(30, audioCtx.currentTime + 1.2);
-
-            let gain = audioCtx.createGain();
-            gain.gain.setValueAtTime(0.8, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1.4);
-
-            whiteNoise.connect(filter);
-            filter.connect(gain);
-            gain.connect(audioCtx.destination);
-
-            whiteNoise.start();
-        }
+        drawRain();
 
         function triggerLightning() {
-            if (document.body.classList.contains('sadboy-mode')) {
-                if (Math.random() < 0.35) {
-                    flashElem.style.opacity = '0.95';
-                    
-                    // Tạo tia sét từ trời đánh xuống
-                    let startX = Math.random() * width * 0.8 + width * 0.1;
-                    activeLightning = createLightningBolt(startX, 0, 35, 0.1, 2);
-
-                    playThunderSound();
-
-                    setTimeout(() => { 
-                        flashElem.style.opacity = '0';
-                        activeLightning = null;
-                    }, 80);
-
-                    setTimeout(() => {
-                        if (Math.random() > 0.4) {
-                            flashElem.style.opacity = '0.7';
-                            setTimeout(() => { flashElem.style.opacity = '0'; }, 50);
-                        }
-                    }, 120);
-                }
+            if (Math.random() < 0.3) {
+                flashElem.style.opacity = '0.9';
+                setTimeout(() => { flashElem.style.opacity = '0'; }, 80);
             }
             setTimeout(triggerLightning, Math.random() * 4000 + 3000);
         }
-
         triggerLightning();
 
-        function toggleTheme() {
-            document.body.classList.toggle('sadboy-mode');
+        /* CODE VIEWER MODAL CONTENT */
+        const codeSamples = {
+            'c++': { file: 'segment_tree.cpp', code: `#include <iostream>\nusing namespace std;\n\n// HNG ACADEMY - Segment Tree Optimization\nvoid update(int node, int start, int end, int idx, int val) {\n    if(start == end) {\n        tree[node] += val;\n        return;\n    }\n    int mid = (start + end) / 2;\n    if(start <= idx && idx <= mid)\n        update(2*node, start, mid, idx, val);\n    else\n        update(2*node+1, mid+1, end, idx, val);\n    tree[node] = tree[2*node] + tree[2*node+1];\n}` },
+            'ai': { file: 'ai_assistant.js', code: `// HNG AI Engine Integration\nasync function queryHNG_AI(prompt) {\n    const response = await fetch('https://api.hng.academy/v1/chat', {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify({ model: 'hng-ultra-2026', query: prompt })\n    });\n    return await response.json();\n}` },
+            'web': { file: 'storm_shader.glsl', code: `// WebGL Storm Background Shader\nvoid main() {\n    vec2 uv = gl_FragCoord.xy / u_resolution.xy;\n    vec3 color = vec3(0.03, 0.05, 0.1);\n    float rain = random(uv * 10.0);\n    gl_FragColor = vec4(color + vec3(rain * 0.2), 1.0);\n}` },
+            'python': { file: 'machine_learning.py', code: `# HNG Data Science Suite\nimport numpy as np\nimport torch\n\nclass HNGNeuralNet(torch.nn.Module):\n    def __init__(self):\n        super().__init__()\n        self.fc = torch.nn.Linear(128, 64)\n    def forward(self, x):\n        return torch.relu(self.fc(x))` }
+        };
+
+        function openCodeModal(type) {
+            const data = codeSamples[type];
+            document.getElementById('modalFileName').innerText = data.file;
+            document.getElementById('modalCodeBody').innerText = data.code;
+            document.getElementById('codeModal').classList.add('active');
         }
 
-        /* --- LIVE SEARCH FILTER CARD --- */
-        function filterCards() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.querySelectorAll('.card');
+        function closeCodeModal() {
+            document.getElementById('codeModal').classList.remove('active');
+        }
 
+        function copyCodeText() {
+            const code = document.getElementById('modalCodeBody').innerText;
+            navigator.clipboard.writeText(code);
+            alert("Đã sao chép mã nguồn vào bộ nhớ tạm!");
+        }
+
+        /* LIVE SEARCH BENTO GRID */
+        function filterBentoGrid() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.bento-card');
             cards.forEach(card => {
                 let title = card.getAttribute('data-title');
-                if (title.includes(input)) {
-                    card.style.display = "block";
-                } else {
-                    card.style.display = "none";
-                }
+                card.style.display = title.includes(input) ? "block" : "none";
             });
         }
 
-        /* --- INTERACTIVE AI CHAT MODAL --- */
-        function openAiChat() {
-            document.getElementById('aiModal').classList.add('active');
+        /* AUDIO VISUALIZER SIMULATION */
+        const visCanvas = document.getElementById('visualizerCanvas');
+        const visCtx = visCanvas.getContext('2d');
+        function drawVisualizer() {
+            visCtx.clearRect(0, 0, visCanvas.width, visCanvas.height);
+            for (let i = 0; i < 5; i++) {
+                let h = Math.random() * visCanvas.height;
+                visCtx.fillStyle = '#00f2fe';
+                visCtx.fillRect(i * 12, visCanvas.height - h, 6, h);
+            }
+            setTimeout(drawVisualizer, 150);
         }
-        function closeAiChat() {
-            document.getElementById('aiModal').classList.remove('active');
-        }
-
-        function sendAiMessage() {
-            let input = document.getElementById('aiInput');
-            let chatBody = document.getElementById('chatBody');
-            let text = input.value.trim();
-
-            if (!text) return;
-
-            // Tin nhắn user
-            let userMsg = document.createElement('div');
-            userMsg.className = 'chat-msg user';
-            userMsg.innerText = text;
-            chatBody.appendChild(userMsg);
-
-            input.value = '';
-            chatBody.scrollTop = chatBody.scrollHeight;
-
-            // Phản hồi giả lập thông minh từ AI HNG
-            setTimeout(() => {
-                let botMsg = document.createElement('div');
-                botMsg.className = 'chat-msg bot';
-                
-                if (text.toLowerCase().includes('chào') || text.toLowerCase().includes('hi')) {
-                    botMsg.innerText = "Chào bạn! Tôi có thể giúp gì cho dự án lập trình của bạn hôm nay?";
-                } else if (text.toLowerCase().includes('code') || text.toLowerCase().includes('học')) {
-                    botMsg.innerText = "HNG ACADEMY cung cấp các cấu trúc dữ liệu và giải thuật tối ưu nhất. Bạn có thể tra cứu ngay trên thanh tìm kiếm!";
-                } else {
-                    botMsg.innerText = "Yêu cầu của bạn đã được tiếp nhận. AI đang phân tích dữ liệu và tối ưu cho hệ thống HNG ACADEMY...";
-                }
-
-                chatBody.appendChild(botMsg);
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }, 800);
-        }
-
-        /* --- HIỆU ỨNG CARD 3D TILT KHI DI CHUỘT --- */
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('mousemove', e => {
-                let rect = card.getBoundingClientRect();
-                let x = e.clientX - rect.left - rect.width / 2;
-                let y = e.clientY - rect.top - rect.height / 2;
-                card.style.transform = `perspective(1000px) rotateX(${-y / 20}deg) rotateY(${x / 20}deg) translateY(-5px)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
-            });
-        });
+        drawVisualizer();
     </script>
 </body>
 </html>
