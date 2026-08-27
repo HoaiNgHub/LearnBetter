@@ -3,23 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HNG ACADEMY - Học Tập & Giải Bài Tập</title>
-    <!-- FontAwesome for Icons -->
+    <title>HNG ACADEMY - Đột Phá Tri Thức</title>
+    <!-- FontAwesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #030712;
-            --card-bg: rgba(17, 24, 39, 0.7);
-            --gold-start: #ffe066;
-            --gold-mid: #f59e0b;
-            --gold-end: #b45309;
-            --neon-cyan: #00f2fe;
-            --neon-pink: #4facfe;
-            --text-main: #f3f4f6;
-            --text-sub: #9ca3af;
+            --primary-glow: #00f2fe;
+            --secondary-glow: #4facfe;
+            --pink-glow: #ff007f;
+            --purple-glow: #7928ca;
+            --card-bg: rgba(15, 23, 42, 0.65);
+            --card-border: rgba(255, 255, 255, 0.12);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
         }
 
         * {
@@ -30,7 +28,7 @@
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: #030712;
             color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
@@ -47,10 +45,9 @@
             pointer-events: none;
             z-index: 0;
             overflow: hidden;
-            background: radial-gradient(circle at 50% 20%, #0d1527 0%, #030712 80%);
+            background: radial-gradient(circle at 50% 20%, #0b1329 0%, #030712 80%);
         }
 
-        /* Các ngôi sao lấp lánh nhỏ */
         .stars {
             position: absolute;
             top: 0;
@@ -66,7 +63,6 @@
             100% { opacity: 1; transform: scale(1.05); }
         }
 
-        /* Dải Sao Băng (Shooting Stars) */
         .shooting-star {
             position: absolute;
             top: 50%;
@@ -103,146 +99,104 @@
             box-shadow: 0 0 10px #00f2fe, 0 0 20px #00f2fe;
         }
 
-        /* Định nghĩa góc và tốc độ rơi khác nhau cho từng sao băng */
-        .shooting-star:nth-child(1) {
-            top: -10%;
-            left: 30%;
-            animation-delay: 0s;
-            animation-duration: 3.5s;
+        .shooting-star:nth-child(1) { top: -10%; left: 30%; animation-delay: 0s; animation-duration: 3.5s; }
+        .shooting-star:nth-child(2) { 
+            top: -5%; left: 60%; animation-delay: 1.2s; animation-duration: 4s; 
+            background: linear-gradient(-45deg, #ffe066, rgba(255, 255, 255, 0)); filter: drop-shadow(0 0 6px #ffe066); 
         }
-        .shooting-star:nth-child(2) {
-            top: -5%;
-            left: 60%;
-            animation-delay: 1.2s;
-            animation-duration: 4s;
-            background: linear-gradient(-45deg, #ffe066, rgba(255, 255, 255, 0));
-            filter: drop-shadow(0 0 6px #ffe066);
+        .shooting-star:nth-child(2)::after { box-shadow: 0 0 10px #ffe066, 0 0 20px #ffe066; }
+        .shooting-star:nth-child(3) { top: 10%; left: 80%; animation-delay: 2.5s; animation-duration: 3.2s; }
+        .shooting-star:nth-child(4) { top: 20%; left: 40%; animation-delay: 3.8s; animation-duration: 4.5s; }
+        .shooting-star:nth-child(5) { 
+            top: -15%; left: 10%; animation-delay: 2s; animation-duration: 3.8s; 
+            background: linear-gradient(-45deg, #ff007f, rgba(255, 255, 255, 0)); filter: drop-shadow(0 0 6px #ff007f); 
         }
-        .shooting-star:nth-child(2)::after {
-            box-shadow: 0 0 10px #ffe066, 0 0 20px #ffe066;
-        }
-        .shooting-star:nth-child(3) {
-            top: 10%;
-            left: 80%;
-            animation-delay: 2.5s;
-            animation-duration: 3.2s;
-        }
-        .shooting-star:nth-child(4) {
-            top: 20%;
-            left: 40%;
-            animation-delay: 3.8s;
-            animation-duration: 4.5s;
-        }
-        .shooting-star:nth-child(5) {
-            top: -15%;
-            left: 10%;
-            animation-delay: 2s;
-            animation-duration: 3.8s;
-            background: linear-gradient(-45deg, #ff007f, rgba(255, 255, 255, 0));
-            filter: drop-shadow(0 0 6px #ff007f);
-        }
-        .shooting-star:nth-child(5)::after {
-            box-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f;
-        }
+        .shooting-star:nth-child(5)::after { box-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f; }
 
-        @keyframes tail {
-            0% { width: 0; }
-            30% { width: 150px; }
-            100% { width: 0; }
-        }
+        @keyframes tail { 0% { width: 0; } 30% { width: 150px; } 100% { width: 0; } }
+        @keyframes shooting { 0% { transform: translateX(0) translateY(0) rotate(45deg); opacity: 1; } 100% { transform: translateX(1000px) translateY(1000px) rotate(45deg); opacity: 0; } }
 
-        @keyframes shooting {
-            0% { transform: translateX(0) translateY(0) rotate(45deg); opacity: 1; }
-            100% { transform: translateX(1000px) translateY(1000px) rotate(45deg); opacity: 0; }
-        }
-
-        /* --- CONTENT MAIN WRAPPER --- */
-        .main-wrapper {
+        /* --- CẤU TRÚC GIAO DIỆN CHÍNH (BAN ĐẦU) --- */
+        .container {
             position: relative;
             z-index: 1;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 50px 20px;
         }
 
-        /* --- HEADER SECTION --- */
+        /* HEADER SẮC SỠ BAN ĐẦU */
         header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 45px;
         }
 
-        /* Tiêu đề HNG ACADEMY Sặc Sỡ & Phát Sáng */
-        .title-academy {
-            font-size: 3.8rem;
+        .brand-title {
+            font-size: 4rem;
             font-weight: 800;
-            letter-spacing: 2px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
             background: linear-gradient(135deg, #ff007f, #7928ca, #00f2fe, #ffe066);
             background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gradientShift 6s ease infinite;
-            text-transform: uppercase;
-            filter: drop-shadow(0 0 25px rgba(0, 242, 254, 0.4));
-            margin-bottom: 12px;
+            animation: glowGradient 5s ease infinite;
+            filter: drop-shadow(0 0 30px rgba(0, 242, 254, 0.45));
+            margin-bottom: 10px;
         }
 
-        @keyframes gradientShift {
+        @keyframes glowGradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* Subtitle với Chữ HNG/HoàiNg Gold Chạy Chạy */
-        .subtitle {
+        .brand-subtitle {
             font-size: 1.25rem;
             color: var(--text-sub);
             font-weight: 400;
         }
 
-        .gold-shimmer {
+        /* HIỆU ỨNG CHỮ GOLD ĐẮC GIÁ */
+        .gold-effect {
             font-weight: 800;
-            background: linear-gradient(90deg, 
-                #b45309 0%, 
-                #ffe066 25%, 
-                #ffffff 50%, 
-                #ffe066 75%, 
-                #b45309 100%);
+            background: linear-gradient(90deg, #b45309, #ffe066, #ffffff, #ffe066, #b45309);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: goldFlow 3s linear infinite;
+            animation: goldShimmer 2.5s linear infinite;
             display: inline-block;
-            text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+            filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.4));
         }
 
-        @keyframes goldFlow {
+        @keyframes goldShimmer {
             to { background-position: 200% center; }
         }
 
-        /* --- SEARCH BAR --- */
-        .search-container {
-            max-width: 600px;
+        /* SEARCH BAR HIỆN ĐẠI BAN ĐẦU */
+        .search-section {
+            max-width: 650px;
             margin: 0 auto 35px auto;
             position: relative;
         }
 
-        .search-box {
+        .search-input {
             width: 100%;
-            padding: 16px 24px 16px 54px;
+            padding: 18px 25px 18px 55px;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid var(--card-border);
             border-radius: 50px;
-            color: white;
+            color: #fff;
             font-size: 1rem;
             outline: none;
-            backdrop-filter: blur(12px);
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            backdrop-filter: blur(15px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .search-box:focus {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+        .search-input:focus {
+            border-color: var(--primary-glow);
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
             background: rgba(255, 255, 255, 0.08);
         }
 
@@ -251,41 +205,42 @@
             left: 22px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-sub);
+            color: var(--primary-glow);
             font-size: 1.2rem;
         }
 
-        /* --- CATEGORY FILTERS --- */
-        .categories {
+        /* MỤC NHỎ (FILTER BUTTONS) */
+        .filter-container {
             display: flex;
             justify-content: center;
             gap: 12px;
             flex-wrap: wrap;
-            margin-bottom: 45px;
+            margin-bottom: 50px;
         }
 
-        .cat-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--card-border);
             color: var(--text-sub);
-            padding: 10px 22px;
+            padding: 10px 24px;
             border-radius: 30px;
-            cursor: pointer;
+            font-size: 0.95rem;
             font-weight: 600;
+            cursor: pointer;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
 
-        .cat-btn:hover, .cat-btn.active {
-            background: linear-gradient(135deg, #00f2fe, #4facfe);
-            color: #000;
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow));
+            color: #030712;
             font-weight: 700;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
             border-color: transparent;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
         }
 
-        /* --- CARDS GRID --- */
-        .grid-container {
+        /* DANH SÁCH THẺ (CARDS GRID BAN ĐẦU) */
+        .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 30px;
@@ -293,55 +248,44 @@
 
         .card {
             background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
             padding: 24px;
-            backdrop-filter: blur(16px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: all 0.4s ease;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
             position: relative;
             overflow: hidden;
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            transition: 0.5s;
-        }
-
-        .card:hover::before {
-            left: 100%;
-        }
-
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
             border-color: rgba(0, 242, 254, 0.5);
-            box-shadow: 0 15px 35px rgba(0, 242, 254, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 242, 254, 0.25);
         }
 
-        .card-tag {
-            display: inline-block;
-            padding: 4px 12px;
+        .card-badge {
+            align-self: flex-start;
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            margin-bottom: 15px;
-            background: rgba(0, 242, 254, 0.15);
-            color: var(--neon-cyan);
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            background: rgba(0, 242, 254, 0.12);
+            color: var(--primary-glow);
             border: 1px solid rgba(0, 242, 254, 0.3);
         }
 
         .card-title {
-            font-size: 1.3rem;
+            font-size: 1.35rem;
             font-weight: 700;
-            margin-bottom: 12px;
             color: #fff;
+            margin-bottom: 10px;
+            line-height: 1.4;
         }
 
         .card-desc {
@@ -349,71 +293,69 @@
             color: var(--text-sub);
             line-height: 1.6;
             margin-bottom: 20px;
+            flex-grow: 1;
         }
 
-        /* Video Container 16:9 */
-        .video-box {
+        .video-wrapper {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             margin-bottom: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
 
-        .video-box iframe {
+        .video-wrapper iframe {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             border: 0;
         }
 
-        /* Download Button */
-        .btn-download {
+        .btn-action {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             width: 100%;
-            padding: 12px 20px;
+            padding: 14px;
             background: linear-gradient(135deg, #10b981, #059669);
             color: white;
             text-decoration: none;
             font-weight: 700;
-            border-radius: 12px;
+            border-radius: 14px;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            border: none;
+            cursor: pointer;
         }
 
-        .btn-download:hover {
+        .btn-action:hover {
             background: linear-gradient(135deg, #34d399, #10b981);
-            box-shadow: 0 0 20px rgba(52, 211, 153, 0.6);
-            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(52, 211, 153, 0.6);
+            transform: translateY(-2px);
         }
 
-        /* Footer */
         footer {
             text-align: center;
-            margin-top: 60px;
-            padding: 20px;
+            margin-top: 70px;
+            padding: 25px;
             color: var(--text-sub);
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .title-academy { font-size: 2.5rem; }
-            .subtitle { font-size: 1rem; }
+            .brand-title { font-size: 2.7rem; }
+            .brand-subtitle { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- PHÔNG NỀN VŨ TRỤ VÀ HIỆU ỨNG SAO BĂNG RƠI -->
+    <!-- KHÔNG GIAN VŨ TRỤ & SAO BĂNG -->
     <div class="space-container">
         <div class="stars"></div>
         <div class="shooting-star"></div>
@@ -423,116 +365,110 @@
         <div class="shooting-star"></div>
     </div>
 
-    <!-- NỘI DUNG CHÍNH TRANG WEB -->
-    <div class="main-wrapper">
+    <!-- KHUNG GIAO DIỆN CHÍNH BAN ĐẦU -->
+    <div class="container">
         
-        <!-- HEADER -->
         <header>
-            <h1 class="title-academy">HNG ACADEMY</h1>
-            <p class="subtitle">Trang Web được sáng lập và Độc Quyền bởi <span class="gold-shimmer">HNG/HoàiNg</span></p>
+            <h1 class="brand-title">HNG ACADEMY</h1>
+            <p class="brand-subtitle">Trang Web được sáng lập và Độc Quyền bởi <span class="gold-effect">HNG/HoàiNg</span></p>
         </header>
 
-        <!-- SEARCH BAR -->
-        <div class="search-container">
+        <!-- THANH TÌM KIẾM SANG TRỌNG -->
+        <div class="search-section">
             <i class="fa-solid fa-magnifying-glass search-icon"></i>
-            <input type="text" id="searchInput" class="search-box" placeholder="Tìm kiếm bài tập, đề thi, video hướng dẫn..." onkeyup="filterCards()">
+            <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm bài tập, đề thi, video bài giảng..." onkeyup="searchCards()">
         </div>
 
-        <!-- MỤC NHỎ (CATEGORIES FILTER) -->
-        <div class="categories">
-            <button class="cat-btn active" onclick="filterCategory('all', this)">Tất Cả</button>
-            <button class="cat-btn" onclick="filterCategory('video', this)">Video Bài Giảng</button>
-            <button class="cat-btn" onclick="filterCategory('pdf', this)">File Đề Bài (.PDF)</button>
-            <button class="cat-btn" onclick="filterCategory('code', this)">Mã Nguồn Mẫu</button>
+        <!-- MỤC NHỎ (CATEGORIES) -->
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterCategory('all', this)">Tất Cả</button>
+            <button class="filter-btn" onclick="filterCategory('video', this)">Video Hướng Dẫn</button>
+            <button class="filter-btn" onclick="filterCategory('pdf', this)">File Bài Tập (.PDF)</button>
+            <button class="filter-btn" onclick="filterCategory('code', this)">Mã Nguồn Mẫu</button>
         </div>
 
-        <!-- DANH SÁCH BÀI HỌC (GRID CARDS) -->
-        <div class="grid-container" id="cardsGrid">
+        <!-- DANH SÁCH CÁC THẺ BÀI HỌC BAN ĐẦU -->
+        <div class="cards-grid" id="cardsGrid">
             
-            <!-- CARD 1 -->
+            <!-- Thẻ 1: Video Bài Giảng -->
             <div class="card" data-category="video">
-                <span class="card-tag">Video Bài Giảng</span>
-                <h2 class="card-title">Bài 01: Lập Trình Web Cơ Bản Từ A-Z</h2>
-                <p class="card-desc">Hướng dẫn chi tiết xây dựng giao diện HTML5/CSS3 chuẩn hiện đại cho người mới bắt đầu.</p>
-                <div class="video-box">
+                <span class="card-badge">Video Bài Giảng</span>
+                <h3 class="card-title">Bài 01: Hướng Dẫn Giải Bài Tập Lập Trình</h3>
+                <p class="card-desc">Xem chi tiết video hướng dẫn từng bước giải bài tập và tải file PDF thực hành kèm theo.</p>
+                <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                 </div>
-                <a href="tailieu-bai01.pdf" download class="btn-download">
-                    <i class="fa-solid fa-file-arrow-down"></i> Tải Đề Bài Thực Hành (.PDF)
+                <a href="baitap01.pdf" download class="btn-action">
+                    <i class="fa-solid fa-cloud-arrow-down"></i> Tải File Bài Tập (.PDF)
                 </a>
             </div>
 
-            <!-- CARD 2 -->
+            <!-- Thẻ 2: File Bài Tập PDF -->
             <div class="card" data-category="pdf">
-                <span class="card-tag">File PDF</span>
-                <h2 class="card-title">Bộ 100 Bài Tập Thuật Toán Chọn Lọc</h2>
-                <p class="card-desc">Tổng hợp các bài toán thuật toán từ cơ bản đến nâng cao có kèm đáp án và giải thích chi tiết.</p>
-                <div style="height: 180px; background: rgba(255,255,255,0.03); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px dashed rgba(255,255,255,0.2);">
-                    <i class="fa-solid fa-file-pdf" style="font-size: 4rem; color: #ff007f;"></i>
+                <span class="card-badge">Tài Liệu PDF</span>
+                <h3 class="card-title">Bộ Đề Thi Thử & Đáp Án Chi Tiết</h3>
+                <p class="card-desc">Tổng hợp 50 câu hỏi trắc nghiệm và tự luận nâng cao giúp rèn luyện tư duy nhanh chóng.</p>
+                <div style="height: 180px; background: rgba(255,255,255,0.03); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px dashed rgba(255,255,255,0.15);">
+                    <i class="fa-solid fa-file-pdf" style="font-size: 4.5rem; color: #ff007f; filter: drop-shadow(0 0 15px rgba(255,0,127,0.5));"></i>
                 </div>
-                <a href="100-bai-tap-thuat-toan.pdf" download class="btn-download">
-                    <i class="fa-solid fa-file-arrow-down"></i> Tải File Bài Tập (.PDF)
+                <a href="dethi-dapan.pdf" download class="btn-action">
+                    <i class="fa-solid fa-cloud-arrow-down"></i> Tải Đề Thi (.PDF)
                 </a>
             </div>
 
-            <!-- CARD 3 -->
+            <!-- Thẻ 3: Code Mẫu -->
             <div class="card" data-category="code">
-                <span class="card-tag">Mã Nguồn</span>
-                <h2 class="card-title">Source Code Giao Diện Vũ Trụ HNG</h2>
-                <p class="card-desc">Tải về toàn bộ mã nguồn HTML/CSS hiệu ứng sao băng lấp lánh để tự tùy biến theo ý thích.</p>
-                <div style="height: 180px; background: rgba(255,255,255,0.03); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px dashed rgba(255,255,255,0.2);">
-                    <i class="fa-solid fa-code" style="font-size: 4rem; color: var(--neon-cyan);"></i>
+                <span class="card-badge">Mã Nguồn Mẫu</span>
+                <h3 class="card-title">Source Code Web HNG ACADEMY</h3>
+                <p class="card-desc">Tải về toàn bộ mã nguồn giao diện HTML/CSS Glassmorphic hiệu ứng sao băng lấp lánh này.</p>
+                <div style="height: 180px; background: rgba(255,255,255,0.03); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px dashed rgba(255,255,255,0.15);">
+                    <i class="fa-solid fa-code" style="font-size: 4.5rem; color: var(--primary-glow); filter: drop-shadow(0 0 15px rgba(0,242,254,0.5));"></i>
                 </div>
-                <a href="hng-academy-source.zip" download class="btn-download">
-                    <i class="fa-solid fa-file-zipper"></i> Tải Source Code (.ZIP)
+                <a href="source-code.zip" download class="btn-action">
+                    <i class="fa-solid fa-file-zipper"></i> Tải Code Mẫu (.ZIP)
                 </a>
             </div>
 
         </div>
 
-        <!-- FOOTER -->
         <footer>
-            <p>© 2026 <strong>HNG ACADEMY</strong>. Phát triển & Độc Quyền bởi <span class="gold-shimmer">HNG/HoàiNg</span>.</p>
+            <p>© 2026 <strong>HNG ACADEMY</strong>. Được sáng lập & Phát triển Độc Quyền bởi <span class="gold-effect">HNG/HoàiNg</span>.</p>
         </footer>
 
     </div>
 
-    <!-- JAVASCRIPT XỬ LÝ LỌC VÀ TÌM KIẾM -->
+    <!-- SCRIPTS -->
     <script>
-        // Tìm kiếm theo tên bài học
-        function filterCards() {
+        function searchCards() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.getElementsByClassName('card');
 
-            for (let i = 0; i < cards.length; i++) {
-                let title = cards[i].querySelector('.card-title').innerText.toLowerCase();
-                let desc = cards[i].querySelector('.card-desc').innerText.toLowerCase();
+            for (let card of cards) {
+                let title = card.querySelector('.card-title').innerText.toLowerCase();
+                let desc = card.querySelector('.card-desc').innerText.toLowerCase();
                 
                 if (title.includes(input) || desc.includes(input)) {
-                    cards[i].style.display = "block";
+                    card.style.display = "flex";
                 } else {
-                    cards[i].style.display = "none";
+                    card.style.display = "none";
                 }
             }
         }
 
-        // Lọc theo mục nhỏ (Categories)
         function filterCategory(category, btnElement) {
             let cards = document.getElementsByClassName('card');
-            let buttons = document.getElementsByClassName('cat-btn');
+            let buttons = document.getElementsByClassName('filter-btn');
 
-            // Đổi trạng thái active nút
             for (let btn of buttons) {
                 btn.classList.remove('active');
             }
             btnElement.classList.add('active');
 
-            // Hiện/Ẩn thẻ theo loại
-            for (let i = 0; i < cards.length; i++) {
-                if (category === 'all' || cards[i].getAttribute('data-category') === category) {
-                    cards[i].style.display = "block";
+            for (let card of cards) {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = "flex";
                 } else {
-                    cards[i].style.display = "none";
+                    card.style.display = "none";
                 }
             }
         }
